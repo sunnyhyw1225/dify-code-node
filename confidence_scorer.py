@@ -1,5 +1,7 @@
 import json
 
+from settings_loader import load_settings, normalize_currency, normalize_expense_group
+
 def main(
     normalized_prediction: str,
     normalized_llm_field_confidence: str,
@@ -44,6 +46,13 @@ def main(
             cur = cur.get(part)
         return cur
 
+    def get_history_default(features, field):
+        stable_defaults = features.get("stable_defaults", {})
+        entry = stable_defaults.get(field, {})
+        if isinstance(entry, dict) and entry.get("use_as_default") is True:
+            return entry.get("value")
+        return None
+
     def mode_by_score(score: float) -> str:
         if score >= 0.88:
             return "prefill"
@@ -55,6 +64,8 @@ def main(
     llm = parse_json_maybe(normalized_llm_field_confidence, {})
     feat = parse_json_maybe(history_features, {})
     sources = parse_json_maybe(field_sources, {})
+    settings = load_settings()
+    default_currency = settings["default_currency"] or "HKD"
 
     field_scores = {}
 
@@ -110,13 +121,21 @@ def main(
 
     # Extra validation: currency
     currency = get_nested_value(pred, "expense_detail.currency")
-    common_currency = feat.get("common_currency", "HKD")
+    common_currency = normalize_currency(
+        get_history_default(feat, "expense_detail.currency")
+    ) or default_currency
 
-    if currency == common_currency:
+    if normalize_currency(currency) is None:
+        field_scores["expense_detail.currency"] = 0.0
+    elif currency == common_currency:
         field_scores["expense_detail.currency"] = max(
             field_scores.get("expense_detail.currency", 0.0),
             0.88
         )
+
+    expense_group = get_nested_value(pred, "expense_detail.expense_group")
+    if expense_group and normalize_expense_group(expense_group) is None:
+        field_scores["expense_detail.expense_group"] = 0.0
 
     # Extra validation: amount
     amount = get_nested_value(pred, "expense_detail.amount")
@@ -125,7 +144,6 @@ def main(
         field_scores["expense_detail.amount"] = 0.0
     else:
         amount_float = safe_float(amount, 0.0)
-        expense_group = get_nested_value(pred, "expense_detail.expense_group")
         group_stats_all = feat.get("amount_stats_by_expense_group", {})
         group_stats = group_stats_all.get(expense_group, {})
         if group_stats and group_stats.get("count", 0) >= 2:

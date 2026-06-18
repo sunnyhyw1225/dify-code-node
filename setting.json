@@ -1,0 +1,4 @@
+{
+    "currencies": ["MXN", "GBP", "KRW", "MOP", "THB", "VND", "CAD", "INR", "NZD", "USD", "AUD", "HKD", "JPY", "CHF", "CNY", "DKK", "NOK", "PHP", "SEK", "SGD", "EUR"],
+    "expense_groups": ["Airfare", "Books/Journals", "Computer", "Delivery/Courier/Postage", "Equipment", "Ferry/Train (Overseas)", "Furniture & Fixture", "General Consumables", "Hotel", "Lab Consumables/Electronics Components", "Meal", "Membership Fee", "Mobile Phone/Portable Electronic Devices", "Others", "Patent Fee", "Publication/Submission Fee", "Registration/Conference/Visa Fee", "Rental Fee", "Service Fee", "Software", "Transportation"]
+}

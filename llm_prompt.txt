@@ -10,10 +10,9 @@ Fields that are safe to prefill
 Fields that should only be shown as suggestions
 Fields that do not have enough evidence and should be left for user input
 [Fixed Identity Fields — use exactly as given, do not modify]
-requestor: Sunny Hon
-email: abc@connect.ust.hk
-department: CPEG
-student_id: 21046162
+{{#1781682366419.fixed_identity_for_llm#}}
+[Allowed Form Options — only use these configured values]
+{{#1781682366419.allowed_form_options#}}
 [Current Context]
 {{#1781682366419.enriched_context#}}
 [Historical Profile for Prediction]
@@ -29,6 +28,8 @@ Event-specific fields must not be fabricated from history alone.
 If a field depends on event-specific details and the current context is insufficient, return null.
 Confidence must reflect evidence strength, not writing certainty.
 Do not include the fixed identity fields inside predicted_input.
+expense_detail.currency must be one of the configured currencies.
+expense_detail.expense_group must be one of the configured expense groups.
 [How to Use the Historical Profile]
 Follow these rules when reading the historical profile:
 If a historical field has "use_as_default": true, it may be used when the current context does not provide a value.
@@ -95,12 +96,14 @@ Otherwise, use a historical value only if the historical profile marks it as rel
 If the historical pattern is weak, return null or use a low-confidence suggestion only.
 Do not over-trust a supervisor simply because it is the most common value.
 expense_detail.currency:
-Prefer "HKD" only when the current context does not specify a currency. If the current context explicitly specifies a currency such as USD, EUR, GBP, RMB, or CNY, use that currency.
-If the historical profile shows HKD as a reliable default, use HKD when context is missing.
+Use only configured currencies.
+Prefer "HKD" only when the current context does not specify a currency and HKD is one of the configured currencies.
+If the current context explicitly specifies a configured currency such as USD, EUR, GBP, or CNY, use that currency.
+If the historical profile shows a configured currency as a reliable default, use it when context is missing.
 expense_detail.book_rate:
 If currency is "HKD", book_rate must be 1.0.
 If the current context explicitly states a non-HKD currency, preserve that currency. Do not override it with HKD just because history prefers HKD. If no reliable book_rate is provided for the non-HKD currency, set book_rate to null and equivalent_hkd_amount to null.
-If no reliable exchange-rate information exists, prefer HKD instead of guessing a foreign-currency rate.
+If no reliable exchange-rate information exists, prefer configured HKD when available instead of guessing a foreign-currency rate.
 expense_detail.amount:
 Use a number only if the current context explicitly provides an amount, fee, price, invoice value, receipt value, or very strong amount clue.
 If not explicitly provided, return null.
@@ -119,14 +122,27 @@ If attach_receipt is true, this must be "".
 If attach_receipt is false and the context gives a reason, write a short reasonable declaration.
 If attach_receipt is false but no reason can be inferred, return null.
 expense_detail.expense_group:
-Infer from current context keywords when possible:
-taxi, MTR, bus, transport, travel, fare, coach, ferry → Transportation
-print, poster, handout, binding → Printing
-conference, workshop, seminar, symposium → Conference
+Infer from current context keywords only when they map clearly to one of the configured expense groups. Examples:
+taxi, MTR, bus, transport, travel, fare, coach → Transportation
+airfare, flight, boarding pass, air ticket → Airfare
+ferry, overseas train, rail pass, intercity train → Ferry/Train (Overseas)
+hotel, accommodation, lodging → Hotel
 software, subscription, cloud, license, database → Software
-component, sensor, hardware, prototype, cable, connector → Lab Materials
+component, sensor, hardware, prototype, cable, connector, electronics parts → Lab Consumables/Electronics Components
 lunch, refreshment, catering, meal → Meal
-registration, admission fee, ticket fee → Registration Fee
+registration, conference, workshop, seminar, symposium, visa fee, admission fee, ticket fee → Registration/Conference/Visa Fee
+postage, courier, shipping, delivery → Delivery/Courier/Postage
+membership, annual dues, society fee → Membership Fee
+publication fee, submission fee, APC → Publication/Submission Fee
+patent filing, patent application, IP fee → Patent Fee
+book, journal, textbook, article purchase → Books/Journals
+computer, laptop, monitor, desktop, computer accessory → Computer
+phone, tablet, portable device, mobile device → Mobile Phone/Portable Electronic Devices
+equipment, apparatus, instrument, tool → Equipment
+furniture, fixture, desk, chair, cabinet → Furniture & Fixture
+rental, hire, lease, venue hire, equipment hire → Rental Fee
+consumables, stationery, office supplies, general supplies → General Consumables
+service charge, vendor service, printing service, processing service → Service Fee
 If no event-specific clue exists, do not blindly use the most common historical expense group.
 A weak historical expense group may be returned only as a low-confidence suggestion.
 If there is no useful evidence, return null.

@@ -1,6 +1,8 @@
 import json
 from collections import Counter, defaultdict
 
+from settings_loader import load_settings, normalize_currency, normalize_expense_group
+
 def main(historical_json_text: str):
     def parse_json_maybe(value, default):
         if value is None:
@@ -104,6 +106,9 @@ def main(historical_json_text: str):
 
     data = parse_json_maybe(historical_json_text, {})
     apps = data.get("applications", [])
+    settings = load_settings()
+    default_currency = settings["default_currency"] or "HKD"
+    default_expense_group = settings["default_expense_group"] or "Others"
 
     submitted_type_counter = Counter()
     submitted_target_counter = Counter()
@@ -145,8 +150,8 @@ def main(historical_json_text: str):
 
         contact = app.get("contact_number") or None
         supervisor = app.get("supervisor_advisor_faculty") or "Unknown"
-        currency = detail.get("currency") or "HKD"
-        group = detail.get("expense_group") or "Others"
+        currency = normalize_currency(detail.get("currency")) or default_currency
+        group = normalize_expense_group(detail.get("expense_group")) or default_expense_group
         receipt = detail.get("attach_receipt")
 
         submitted_type_counter[submitted_type] += 1
@@ -244,6 +249,10 @@ def main(historical_json_text: str):
     # This is intentionally smaller and more directive than full_features.
     history_profile_for_llm = {
         "sample_size": valid_apps,
+        "allowed_values": {
+            "currencies": settings["currencies"],
+            "expense_groups": settings["expense_groups"],
+        },
         "how_to_use_history": [
             "Use stable defaults only when current context does not provide a value.",
             "Do not use weak historical patterns as if they are facts.",
