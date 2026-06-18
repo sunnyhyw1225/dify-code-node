@@ -1,5 +1,5 @@
 def main(a: float, b: float) -> dict:
-    result = a + b
+    result = a * b
 
     return {
         "a": str(a),
