@@ -2,8 +2,8 @@ def main(a: float, b: float) -> dict:
     result = a + b
 
     return {
-        "a": a,
-        "b": b,
+        "a": str(a),
+        "b": str(b),
         "operation": "addition",
-        "result": result
+        "result": str(result)
     }
