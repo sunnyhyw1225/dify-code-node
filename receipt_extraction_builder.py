@@ -215,6 +215,14 @@ def main(
     normalized_extraction = {
         "merchant_name": merchant_name,
         "transaction_date": transaction_date,
+        "date_from": first_non_empty(
+            parsed_output,
+            ["date_from", "start_date", "service_start_date", "check_in_date"],
+        ) or transaction_date,
+        "date_end": first_non_empty(
+            parsed_output,
+            ["date_end", "end_date", "service_end_date", "check_out_date"],
+        ) or transaction_date,
         "currency": normalize_currency_value(parsed_output),
         "total_amount": total_amount,
         "subtotal_amount": subtotal_amount,

@@ -1,0 +1,1576 @@
+app:
+  description: ''
+  icon: 📄
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: student-expense-claim-form
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.4.2@21195ee1321849e0a7d4b3f6b2fd8c2be23ea6c7182e1b444ecc4c1711b52468
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .pdf
+      - .jpg
+      - .jpeg
+      - .png
+      - .PDF
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - custom
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: true
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: true
+        number_limits: 5
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 5
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: template-transform
+        targetType: end
+      id: 1781684888899-source-1781683719402-target
+      source: '1781684888899'
+      sourceHandle: source
+      target: '1781683719402'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1781765794950-source-1781765768737-target
+      source: '1781765794950'
+      sourceHandle: source
+      target: '1781765768737'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1781765768737-source-1781766217894-target
+      source: '1781765768737'
+      sourceHandle: source
+      target: '1781766217894'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1781766217894-source-1781766285748-target
+      source: '1781766217894'
+      sourceHandle: source
+      target: '1781766285748'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: template-transform
+      id: 1781766285748-source-1781766431547-target
+      source: '1781766285748'
+      sourceHandle: source
+      target: '1781766431547'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: template-transform
+        targetType: end
+      id: 1781766431547-source-1781766499588-target
+      source: '1781766431547'
+      sourceHandle: source
+      target: '1781766499588'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: http-request
+      id: 1781681523003-source-1781766750687-target
+      source: '1781681523003'
+      sourceHandle: source
+      target: '1781766750687'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 1781766750687-source-1781765693442-target
+      source: '1781766750687'
+      sourceHandle: source
+      target: '1781765693442'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1781765693442-source-1781765794950-target
+      source: '1781765693442'
+      sourceHandle: source
+      target: '1781765794950'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: User Input
+        type: start
+        variables:
+        - default: HON, Sunny
+          hint: ''
+          label: Requestor
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: requestor
+        - default: ITSO
+          hint: ''
+          label: Department
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: department
+        - default: abc@connect.ust.hk
+          hint: ''
+          label: Email
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: email
+        - default: '21000001'
+          hint: ''
+          label: Student ID
+          options: []
+          placeholder: ''
+          required: true
+          type: number
+          variable: student_id
+        - allowed_file_extensions:
+          - .pdf
+          - .jpg
+          - .jpeg
+          - .png
+          allowed_file_types:
+          - custom
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          default: ''
+          hide: false
+          hint: ''
+          label: Please upload receipts
+          max_length: 5
+          options: []
+          placeholder: ''
+          required: true
+          type: file-list
+          variable: upload_files
+      height: 239
+      id: '1781681523003'
+      position:
+        x: -736.7060543469822
+        y: 279.11313793452706
+      positionAbsolute:
+        x: -736.7060543469822
+        y: 279.11313793452706
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1781684888899'
+          - output
+          value_type: string
+          variable: output
+        selected: false
+        title: Output
+        type: end
+      height: 88
+      id: '1781683719402'
+      position:
+        x: 4459.609481944996
+        y: 274.6650833742858
+      positionAbsolute:
+        x: 4459.609481944996
+        y: 274.6650833742858
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        selected: false
+        template: '# Student Expense Claim Prediction
+
+
+          ## Status
+
+
+          ✅ {{ status }}
+
+
+          ---
+
+
+          ## Fixed Identity
+
+
+          ```json
+
+          {{ pretty_fixed_identity }}
+
+          ```
+
+
+          ---
+
+
+          ## Predicted Form Input
+
+
+          {{ pretty_predicted_table }}
+
+
+          ---
+
+
+          ## Overall Confidence
+
+
+          **{{ pretty_overall_score }}**
+
+
+          ---
+
+
+          ## Field-Level Confidence
+
+
+          {{ pretty_confidence_table }}
+
+
+          ---
+
+
+          ## Explanation
+
+
+          {{ pretty_explanations }}
+
+
+          ---
+
+
+          ## Raw Predicted JSON
+
+
+          ```json
+
+          {{ pretty_predicted_json }}
+
+          ```
+
+          '
+        title: output formatter
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1781684995524'
+          - status
+          value_type: string
+          variable: status
+        - value_selector:
+          - '1781684995524'
+          - pretty_fixed_identity
+          value_type: object
+          variable: pretty_fixed_identity
+        - value_selector:
+          - '1781684995524'
+          - pretty_predicted_table
+          value_type: string
+          variable: pretty_predicted_table
+        - value_selector:
+          - '1781684995524'
+          - pretty_confidence_table
+          value_type: string
+          variable: pretty_confidence_table
+        - value_selector:
+          - '1781684995524'
+          - pretty_explanations
+          value_type: string
+          variable: pretty_explanations
+        - value_selector:
+          - '1781684995524'
+          - pretty_predicted_json
+          value_type: object
+          variable: pretty_predicted_json
+        - value_selector:
+          - '1781684995524'
+          - pretty_field_scores_json
+          value_type: object
+          variable: pretty_field_scores_json
+        - value_selector:
+          - '1781684995524'
+          - pretty_display_mode_json
+          value_type: object
+          variable: pretty_display_mode_json
+        - value_selector:
+          - '1781684995524'
+          - pretty_overall_score
+          value_type: string
+          variable: pretty_overall_score
+      height: 52
+      id: '1781684888899'
+      position:
+        x: 4097.796208131655
+        y: 286.26338694427176
+      positionAbsolute:
+        x: 4097.796208131655
+        y: 286.26338694427176
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import datetime\nimport json\n\n\ndef main(\n    requestor,\n    department,\n\
+          \    email,\n    student_id,\n    upload_files=None,\n    settings_json=None,\n\
+          \    currencies=None,\n    expense_groups=None,\n):\n    def clean_string_list(values):\n\
+          \        cleaned = []\n        seen = set()\n\n        for value in values\
+          \ or []:\n            if value is None:\n                continue\n    \
+          \        text = str(value).strip()\n            if not text or text in seen:\n\
+          \                continue\n            cleaned.append(text)\n          \
+          \  seen.add(text)\n\n        return cleaned\n\n    def parse_json_maybe(value,\
+          \ default):\n        if value is None:\n            return default\n   \
+          \     if isinstance(value, (dict, list)):\n            return value\n  \
+          \      if isinstance(value, str):\n            text = value.strip()\n  \
+          \          if not text:\n                return default\n            try:\n\
+          \                return json.loads(text)\n            except json.JSONDecodeError:\n\
+          \                return default\n        return default\n\n    def normalize_upload_files(value):\n\
+          \        raw_files = parse_json_maybe(value, value)\n\n        if raw_files\
+          \ is None:\n            return []\n        if isinstance(raw_files, dict):\n\
+          \            raw_files = [raw_files]\n        if not isinstance(raw_files,\
+          \ list):\n            return [{\"name\": str(raw_files), \"type\": \"\"\
+          , \"size\": None}]\n\n        files = []\n        for item in raw_files:\n\
+          \            if isinstance(item, dict):\n                files.append(\n\
+          \                    {\n                        \"name\": item.get(\"name\"\
+          ) or item.get(\"filename\") or item.get(\"title\") or \"\",\n          \
+          \              \"type\": item.get(\"mime_type\") or item.get(\"type\") or\
+          \ item.get(\"extension\") or \"\",\n                        \"size\": item.get(\"\
+          size\"),\n                        \"url\": item.get(\"url\") or item.get(\"\
+          download_url\") or \"\",\n                    }\n                )\n   \
+          \         else:\n                files.append({\"name\": str(item), \"type\"\
+          : \"\", \"size\": None, \"url\": \"\"})\n        return files\n\n    def\
+          \ load_settings_inline(settings_payload, currency_values, expense_group_values):\n\
+          \        data = parse_json_maybe(settings_payload, {})\n        if not isinstance(data,\
+          \ dict):\n            data = {}\n\n        currencies = [\n            value.upper()\n\
+          \            for value in clean_string_list(\n                currency_values\
+          \ if currency_values is not None else data.get(\"currencies\", [])\n   \
+          \         )\n        ]\n        expense_groups = clean_string_list(\n  \
+          \          expense_group_values if expense_group_values is not None else\
+          \ data.get(\"expense_groups\", [])\n        )\n\n        return {\n    \
+          \        \"currencies\": currencies,\n            \"expense_groups\": expense_groups,\n\
+          \        }\n\n    settings = load_settings_inline(settings_json, currencies,\
+          \ expense_groups)\n    fixed_identity = {\n        \"requestor\": requestor,\n\
+          \        \"email\": email,\n        \"department\": department,\n      \
+          \  \"student_id\": str(student_id) if student_id is not None else \"\",\n\
+          \    }\n    file_summary = normalize_upload_files(upload_files)\n\n    context_obj\
+          \ = {\n        \"timestamp\": datetime.datetime.now(\n            tz=datetime.timezone(datetime.timedelta(hours=8))\n\
+          \        ).isoformat(),\n        \"identity\": fixed_identity,\n       \
+          \ \"upload_summary\": {\n            \"file_count\": len(file_summary),\n\
+          \            \"files\": file_summary,\n        },\n        \"allowed_form_options\"\
+          : {\n            \"currencies\": settings[\"currencies\"],\n           \
+          \ \"expense_groups\": settings[\"expense_groups\"],\n        },\n    }\n\
+          \n    return {\n        \"fixed_identity\": json.dumps(fixed_identity, ensure_ascii=False),\n\
+          \        \"fixed_identity_for_llm\": json.dumps(fixed_identity, ensure_ascii=False),\n\
+          \        \"allowed_form_options\": json.dumps(\n            {\n        \
+          \        \"currencies\": settings[\"currencies\"],\n                \"expense_groups\"\
+          : settings[\"expense_groups\"],\n            },\n            ensure_ascii=False,\n\
+          \        ),\n        \"enriched_context\": json.dumps(context_obj, ensure_ascii=False),\n\
+          \        \"upload_file_summary\": json.dumps(file_summary, ensure_ascii=False),\n\
+          \    }\n"
+        code_language: python3
+        outputs:
+          allowed_form_options:
+            children: null
+            type: string
+          enriched_context:
+            children: null
+            type: string
+          fixed_identity:
+            children: null
+            type: string
+          fixed_identity_for_llm:
+            children: null
+            type: string
+          upload_file_summary:
+            children: null
+            type: string
+        selected: false
+        title: Context Builder
+        type: code
+        variables:
+        - value_selector:
+          - '1781681523003'
+          - requestor
+          value_type: string
+          variable: requestor
+        - value_selector:
+          - '1781681523003'
+          - department
+          value_type: string
+          variable: department
+        - value_selector:
+          - '1781681523003'
+          - email
+          value_type: string
+          variable: email
+        - value_selector:
+          - '1781681523003'
+          - student_id
+          value_type: number
+          variable: student_id
+        - value_selector:
+          - '1781681523003'
+          - upload_files
+          value_type: array[file]
+          variable: upload_files
+        - value_selector:
+          - '1781766750687'
+          - body
+          value_type: string
+          variable: settings_json
+      height: 52
+      id: '1781765693442'
+      position:
+        x: -59.080824708593155
+        y: 313.9486919838799
+      positionAbsolute:
+        x: -59.080824708593155
+        y: 313.9486919838799
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\nimport re\n\n\ndef main(\n    llm_raw_output,\n    history_features=None,\n\
+          \    receipt_extraction=None,\n    receipt_raw_text=None,\n    settings_json=None,\n\
+          \    currencies=None,\n    expense_groups=None,\n):\n    def clean_string_list(values):\n\
+          \        cleaned = []\n        seen = set()\n\n        for value in values\
+          \ or []:\n            if value is None:\n                continue\n    \
+          \        text = str(value).strip()\n            if not text or text in seen:\n\
+          \                continue\n            cleaned.append(text)\n          \
+          \  seen.add(text)\n\n        return cleaned\n\n    def parse_json_maybe(value,\
+          \ default):\n        if value is None:\n            return default\n   \
+          \     if isinstance(value, (dict, list)):\n            return value\n  \
+          \      if isinstance(value, str):\n            text = value.strip()\n  \
+          \          if not text:\n                return default\n            try:\n\
+          \                return json.loads(text)\n            except json.JSONDecodeError:\n\
+          \                return default\n        return default\n\n    def strip_fence(text):\n\
+          \        text = str(text or \"\").strip()\n        text = re.sub(r\"^```[a-zA-Z]*\\\
+          n?\", \"\", text)\n        text = re.sub(r\"\\n?```$\", \"\", text)\n  \
+          \      return text.strip()\n\n    def extract_first_json_object(text):\n\
+          \        start = text.find(\"{\")\n        if start < 0:\n            raise\
+          \ ValueError(\"No JSON object found in LLM output.\")\n        depth = 0\n\
+          \        in_string = False\n        escape = False\n\n        for index\
+          \ in range(start, len(text)):\n            char = text[index]\n        \
+          \    if in_string:\n                if escape:\n                    escape\
+          \ = False\n                elif char == \"\\\\\":\n                    escape\
+          \ = True\n                elif char == '\"':\n                    in_string\
+          \ = False\n                continue\n\n            if char == '\"':\n  \
+          \              in_string = True\n            elif char == \"{\":\n     \
+          \           depth += 1\n            elif char == \"}\":\n              \
+          \  depth -= 1\n                if depth == 0:\n                    return\
+          \ text[start:index + 1]\n\n        raise ValueError(\"Incomplete JSON object\
+          \ in LLM output.\")\n\n    def safe_float_or_none(value):\n        try:\n\
+          \            if value is None or value == \"\":\n                return\
+          \ None\n            return float(value)\n        except (TypeError, ValueError):\n\
+          \            return None\n\n    def parse_bool_or_none(value):\n       \
+          \ if isinstance(value, bool):\n            return value\n        if value\
+          \ is None:\n            return None\n        if isinstance(value, (int,\
+          \ float)):\n            return bool(value)\n        text = str(value).strip().lower()\n\
+          \        if text in {\"true\", \"yes\", \"y\", \"1\"}:\n            return\
+          \ True\n        if text in {\"false\", \"no\", \"n\", \"0\"}:\n        \
+          \    return False\n        return None\n\n    def normalize_text_or_none(value):\n\
+          \        if value is None:\n            return None\n        text = str(value).strip()\n\
+          \        return text or None\n\n    def normalize_date_or_none(value):\n\
+          \        text = normalize_text_or_none(value)\n        if text is None:\n\
+          \            return None\n        return text\n\n    def load_settings_inline(settings_payload,\
+          \ currency_values, expense_group_values):\n        data = parse_json_maybe(settings_payload,\
+          \ {})\n        if not isinstance(data, dict):\n            data = {}\n\n\
+          \        allowed_currencies = {\n            value.upper()\n           \
+          \ for value in clean_string_list(\n                currency_values if currency_values\
+          \ is not None else data.get(\"currencies\", [])\n            )\n       \
+          \ }\n        allowed_expense_groups = set(\n            clean_string_list(\n\
+          \                expense_group_values\n                if expense_group_values\
+          \ is not None\n                else data.get(\"expense_groups\", [])\n \
+          \           )\n        )\n\n        return {\n            \"currencies\"\
+          : allowed_currencies,\n            \"expense_groups\": allowed_expense_groups,\n\
+          \        }\n\n    def normalize_currency(value):\n        settings = load_settings_inline(settings_json,\
+          \ currencies, expense_groups)\n        if value is None:\n            return\
+          \ None\n\n        text = str(value).strip().upper()\n        if not text:\n\
+          \            return None\n\n        return text if text in settings[\"currencies\"\
+          ] else None\n\n    def normalize_expense_group(value):\n        settings\
+          \ = load_settings_inline(settings_json, currencies, expense_groups)\n  \
+          \      if value is None:\n            return None\n\n        text = str(value).strip()\n\
+          \        if not text:\n            return None\n\n        return text if\
+          \ text in settings[\"expense_groups\"] else None\n\n    def get_history_default(features,\
+          \ field):\n        stable_defaults = features.get(\"stable_defaults\", {})\n\
+          \        entry = stable_defaults.get(field, {})\n        if isinstance(entry,\
+          \ dict) and entry.get(\"use_as_default\") is True:\n            return entry.get(\"\
+          value\")\n        return None\n\n    def get_default_source(features, field):\n\
+          \        return \"history_default\" if get_history_default(features, field)\
+          \ is not None else \"rule\"\n\n    def normalize_missing_fields(value):\n\
+          \        items = parse_json_maybe(value, value)\n        if items is None:\n\
+          \            return []\n        if isinstance(items, str):\n           \
+          \ items = [items]\n        if not isinstance(items, list):\n           \
+          \ return []\n        return [str(item).strip() for item in items if str(item).strip()]\n\
+          \n    def normalize_source_file_indices(value):\n        if value is None:\n\
+          \            return []\n        if not isinstance(value, list):\n      \
+          \      value = [value]\n        result = []\n        for item in value:\n\
+          \            try:\n                result.append(int(item))\n          \
+          \  except (TypeError, ValueError):\n                continue\n        return\
+          \ result\n\n    raw = strip_fence(llm_raw_output)\n    try:\n        obj\
+          \ = json.loads(raw)\n    except json.JSONDecodeError:\n        obj = json.loads(extract_first_json_object(raw))\n\
+          \n    feat = parse_json_maybe(history_features, {})\n    receipt = parse_json_maybe(receipt_extraction,\
+          \ {})\n    raw_receipt_text = normalize_text_or_none(receipt_raw_text)\n\
+          \n    def normalize_single_result(result_obj, fallback_group_index):\n \
+          \       result_obj = result_obj if isinstance(result_obj, dict) else {}\n\
+          \n        predicted_input = result_obj.get(\"predicted_input\", {})\n  \
+          \      if not isinstance(predicted_input, dict):\n            predicted_input\
+          \ = {}\n\n        llm_field_confidence = parse_json_maybe(\n           \
+          \ result_obj.get(\"llm_field_confidence\", {}),\n            {},\n     \
+          \   )\n        if not isinstance(llm_field_confidence, dict):\n        \
+          \    llm_field_confidence = {}\n\n        missing_fields = normalize_missing_fields(result_obj.get(\"\
+          missing_fields\", []))\n        required_user_input_reason = parse_json_maybe(\n\
+          \            result_obj.get(\"required_user_input_reason\", {}),\n     \
+          \       {},\n        )\n        if not isinstance(required_user_input_reason,\
+          \ dict):\n            required_user_input_reason = {}\n\n        explanations\
+          \ = parse_json_maybe(result_obj.get(\"explanations\", []), [])\n       \
+          \ if not isinstance(explanations, list):\n            explanations = [str(explanations)]\n\
+          \        explanations = [str(item).strip() for item in explanations if str(item).strip()][:3]\n\
+          \n        field_sources = {}\n\n        submitted = predicted_input.setdefault(\"\
+          submitted_to\", {})\n        if not isinstance(submitted, dict):\n     \
+          \       submitted = {}\n            predicted_input[\"submitted_to\"] =\
+          \ submitted\n\n        detail = predicted_input.setdefault(\"expense_detail\"\
+          , {})\n        if not isinstance(detail, dict):\n            detail = {}\n\
+          \            predicted_input[\"expense_detail\"] = detail\n        detail.pop(\"\
+          book_rate\", None)\n        detail.pop(\"equivalent_hkd_amount\", None)\n\
+          \n        submitted_type = normalize_text_or_none(submitted.get(\"type\"\
+          ))\n        if submitted_type not in {\"Department\", \"Specific Endorser\"\
+          }:\n            submitted_type = get_history_default(feat, \"submitted_to.type\"\
+          ) or \"Department\"\n            field_sources[\"submitted_to.type\"] =\
+          \ get_default_source(feat, \"submitted_to.type\")\n        else:\n     \
+          \       field_sources[\"submitted_to.type\"] = \"llm\"\n        submitted[\"\
+          type\"] = submitted_type\n\n        submitted_target = normalize_text_or_none(submitted.get(\"\
+          target\"))\n        if submitted_target is None:\n            submitted_target\
+          \ = get_history_default(feat, \"submitted_to.target\") or \"CPEG Office\"\
+          \n            field_sources[\"submitted_to.target\"] = get_default_source(feat,\
+          \ \"submitted_to.target\")\n        else:\n            field_sources[\"\
+          submitted_to.target\"] = \"llm\"\n        submitted[\"target\"] = submitted_target\n\
+          \n        predicted_input[\"contact_number\"] = None\n        field_sources[\"\
+          contact_number\"] = \"missing\"\n\n        supervisor = normalize_text_or_none(predicted_input.get(\"\
+          supervisor_advisor_faculty\"))\n        if supervisor is None:\n       \
+          \     supervisor = normalize_text_or_none(\n                get_history_default(feat,\
+          \ \"supervisor_advisor_faculty\")\n            )\n            field_sources[\"\
+          supervisor_advisor_faculty\"] = (\n                \"history_default\" if\
+          \ supervisor else \"missing\"\n            )\n        else:\n          \
+          \  field_sources[\"supervisor_advisor_faculty\"] = \"llm\"\n        predicted_input[\"\
+          supervisor_advisor_faculty\"] = supervisor\n\n        date_from = normalize_date_or_none(predicted_input.get(\"\
+          date_from\"))\n        if date_from is None:\n            date_from = normalize_date_or_none(\n\
+          \                result_obj.get(\"date_from\") or receipt.get(\"date_from\"\
+          ) or receipt.get(\"transaction_date\")\n            )\n            field_sources[\"\
+          date_from\"] = \"receipt_explicit\" if date_from else \"missing\"\n    \
+          \    else:\n            field_sources[\"date_from\"] = \"receipt_explicit\"\
+          \n        predicted_input[\"date_from\"] = date_from\n\n        date_end\
+          \ = normalize_date_or_none(predicted_input.get(\"date_end\"))\n        if\
+          \ date_end is None:\n            receipt_date_end = normalize_date_or_none(result_obj.get(\"\
+          date_end\") or receipt.get(\"date_end\"))\n            if receipt_date_end\
+          \ is not None:\n                date_end = receipt_date_end\n          \
+          \      field_sources[\"date_end\"] = \"receipt_explicit\"\n            elif\
+          \ date_from is not None:\n                date_end = date_from\n       \
+          \         field_sources[\"date_end\"] = \"rule\"\n            else:\n  \
+          \              field_sources[\"date_end\"] = \"missing\"\n        else:\n\
+          \            field_sources[\"date_end\"] = \"receipt_explicit\"\n      \
+          \  predicted_input[\"date_end\"] = date_end\n\n        normalized_group\
+          \ = normalize_expense_group(detail.get(\"expense_group\"))\n        if normalized_group\
+          \ is None:\n            normalized_group = None\n            field_sources[\"\
+          expense_detail.expense_group\"] = \"missing\"\n        else:\n         \
+          \   field_sources[\"expense_detail.expense_group\"] = \"context_inferred\"\
+          \n        detail[\"expense_group\"] = normalized_group\n\n        business_purpose\
+          \ = normalize_text_or_none(detail.get(\"business_purpose\"))\n        detail[\"\
+          business_purpose\"] = business_purpose\n        field_sources[\"expense_detail.business_purpose\"\
+          ] = (\n            \"context_inferred\" if business_purpose else \"missing\"\
+          \n        )\n\n        expense_description = normalize_text_or_none(detail.get(\"\
+          expense_description\"))\n        if expense_description is None:\n     \
+          \       expense_description = normalize_text_or_none(receipt.get(\"merchant_name\"\
+          ))\n            field_sources[\"expense_detail.expense_description\"] =\
+          \ (\n                \"receipt_explicit\" if expense_description else \"\
+          missing\"\n            )\n        else:\n            field_sources[\"expense_detail.expense_description\"\
+          ] = \"receipt_explicit\"\n        detail[\"expense_description\"] = expense_description\n\
+          \n        currency = normalize_currency(detail.get(\"currency\"))\n    \
+          \    if currency is None:\n            currency = normalize_currency(receipt.get(\"\
+          currency\"))\n            field_sources[\"expense_detail.currency\"] = (\n\
+          \                \"receipt_explicit\" if currency else \"missing\"\n   \
+          \         )\n        else:\n            field_sources[\"expense_detail.currency\"\
+          ] = \"receipt_explicit\"\n        detail[\"currency\"] = currency\n\n  \
+          \      amount = safe_float_or_none(detail.get(\"amount\"))\n        if amount\
+          \ is None:\n            amount = safe_float_or_none(receipt.get(\"total_amount\"\
+          ))\n            field_sources[\"expense_detail.amount\"] = \"receipt_explicit\"\
+          \ if amount is not None else \"missing\"\n        else:\n            field_sources[\"\
+          expense_detail.amount\"] = \"receipt_explicit\"\n        detail[\"amount\"\
+          ] = amount\n\n        attach_receipt = parse_bool_or_none(detail.get(\"\
+          attach_receipt\"))\n        receipt_evidence_present = bool(receipt) or\
+          \ bool(raw_receipt_text)\n        if attach_receipt is None:\n         \
+          \   attach_receipt = True if receipt_evidence_present else None\n      \
+          \      field_sources[\"expense_detail.attach_receipt\"] = (\n          \
+          \      \"receipt_explicit\" if attach_receipt is True else \"missing\"\n\
+          \            )\n        else:\n            field_sources[\"expense_detail.attach_receipt\"\
+          ] = (\n                \"receipt_explicit\" if attach_receipt is True else\
+          \ \"llm\"\n            )\n        detail[\"attach_receipt\"] = attach_receipt\n\
+          \n        declare_if_no_receipt = normalize_text_or_none(detail.get(\"declare_if_no_receipt\"\
+          ))\n        if attach_receipt is True:\n            declare_if_no_receipt\
+          \ = \"\"\n            field_sources[\"expense_detail.declare_if_no_receipt\"\
+          ] = \"rule\"\n        elif attach_receipt is False:\n            field_sources[\"\
+          expense_detail.declare_if_no_receipt\"] = (\n                \"llm\" if\
+          \ declare_if_no_receipt else \"missing\"\n            )\n        else:\n\
+          \            declare_if_no_receipt = None\n            field_sources[\"\
+          expense_detail.declare_if_no_receipt\"] = \"missing\"\n        detail[\"\
+          declare_if_no_receipt\"] = declare_if_no_receipt\n\n        default_missing_fields\
+          \ = []\n        if detail[\"amount\"] is None:\n            default_missing_fields.append(\"\
+          expense_detail.amount\")\n        if detail[\"currency\"] is None:\n   \
+          \         default_missing_fields.append(\"expense_detail.currency\")\n \
+          \       if predicted_input[\"date_from\"] is None:\n            default_missing_fields.append(\"\
+          date_from\")\n        if predicted_input[\"date_end\"] is None:\n      \
+          \      default_missing_fields.append(\"date_end\")\n        if detail[\"\
+          expense_group\"] is None:\n            default_missing_fields.append(\"\
+          expense_detail.expense_group\")\n        if detail[\"business_purpose\"\
+          ] is None:\n            default_missing_fields.append(\"expense_detail.business_purpose\"\
+          )\n\n        merged_missing = []\n        seen = set()\n        for field\
+          \ in missing_fields + default_missing_fields:\n            if field not\
+          \ in seen:\n                merged_missing.append(field)\n             \
+          \   seen.add(field)\n\n        if \"expense_detail.amount\" in merged_missing\
+          \ and \"expense_detail.amount\" not in required_user_input_reason:\n   \
+          \         required_user_input_reason[\"expense_detail.amount\"] = (\n  \
+          \              \"The receipt does not show a single clear final amount.\"\
+          \n            )\n        if (\n            \"expense_detail.business_purpose\"\
+          \ in merged_missing\n            and \"expense_detail.business_purpose\"\
+          \ not in required_user_input_reason\n        ):\n            required_user_input_reason[\"\
+          expense_detail.business_purpose\"] = (\n                \"The receipt does\
+          \ not explain the academic or business purpose.\"\n            )\n     \
+          \   if (\n            \"expense_detail.currency\" in merged_missing\n  \
+          \          and \"expense_detail.currency\" not in required_user_input_reason\n\
+          \        ):\n            required_user_input_reason[\"expense_detail.currency\"\
+          ] = (\n                \"The receipt currency is missing or ambiguous.\"\
+          \n            )\n        if \"date_from\" in merged_missing and \"date_from\"\
+          \ not in required_user_input_reason:\n            required_user_input_reason[\"\
+          date_from\"] = (\n                \"The receipt does not show a clear start\
+          \ or transaction date.\"\n            )\n        if \"date_end\" in merged_missing\
+          \ and \"date_end\" not in required_user_input_reason:\n            required_user_input_reason[\"\
+          date_end\"] = (\n                \"The receipt does not show a clear end\
+          \ date.\"\n            )\n        if (\n            \"expense_detail.expense_group\"\
+          \ in merged_missing\n            and \"expense_detail.expense_group\" not\
+          \ in required_user_input_reason\n        ):\n            required_user_input_reason[\"\
+          expense_detail.expense_group\"] = (\n                \"The receipt does\
+          \ not map clearly to one configured expense group.\"\n            )\n\n\
+          \        receipt_group_id = normalize_text_or_none(result_obj.get(\"receipt_group_id\"\
+          ))\n        if receipt_group_id is None:\n            receipt_group_id =\
+          \ f\"receipt_{fallback_group_index}\"\n\n        return {\n            \"\
+          receipt_group_id\": receipt_group_id,\n            \"source_file_indices\"\
+          : normalize_source_file_indices(result_obj.get(\"source_file_indices\")),\n\
+          \            \"same_receipt\": parse_bool_or_none(result_obj.get(\"same_receipt\"\
+          )),\n            \"predicted_input\": predicted_input,\n            \"llm_field_confidence\"\
+          : llm_field_confidence,\n            \"field_sources\": field_sources,\n\
+          \            \"explanations\": explanations,\n            \"missing_fields\"\
+          : merged_missing,\n            \"required_user_input_reason\": required_user_input_reason,\n\
+          \        }\n\n    raw_results = obj.get(\"results\")\n    if isinstance(raw_results,\
+          \ list) and raw_results:\n        results = raw_results\n    else:\n   \
+          \     results = [obj]\n\n    normalized_results = [\n        normalize_single_result(result,\
+          \ index)\n        for index, result in enumerate(results, start=1)\n   \
+          \ ]\n\n    first_result = normalized_results[0] if normalized_results else\
+          \ {\n        \"predicted_input\": {},\n        \"llm_field_confidence\"\
+          : {},\n        \"field_sources\": {},\n        \"explanations\": [],\n \
+          \       \"missing_fields\": [],\n        \"required_user_input_reason\"\
+          : {},\n    }\n\n    return {\n        \"normalized_results\": json.dumps(normalized_results,\
+          \ ensure_ascii=False),\n        \"normalized_prediction\": json.dumps(first_result[\"\
+          predicted_input\"], ensure_ascii=False),\n        \"normalized_llm_confidence\"\
+          : json.dumps(first_result[\"llm_field_confidence\"], ensure_ascii=False),\n\
+          \        \"field_sources\": json.dumps(first_result[\"field_sources\"],\
+          \ ensure_ascii=False),\n        \"explanations\": json.dumps(first_result[\"\
+          explanations\"], ensure_ascii=False),\n        \"missing_fields\": json.dumps(first_result[\"\
+          missing_fields\"], ensure_ascii=False),\n        \"required_user_input_reason\"\
+          : json.dumps(\n            first_result[\"required_user_input_reason\"],\n\
+          \            ensure_ascii=False,\n        ),\n    }\n"
+        code_language: python3
+        outputs:
+          explanations:
+            children: null
+            type: string
+          field_sources:
+            children: null
+            type: string
+          missing_fields:
+            children: null
+            type: string
+          normalized_llm_confidence:
+            children: null
+            type: string
+          normalized_prediction:
+            children: null
+            type: string
+          normalized_results:
+            children: null
+            type: string
+          required_user_input_reason:
+            children: null
+            type: string
+        selected: false
+        title: Prediction Normalizer
+        type: code
+        variables:
+        - value_selector:
+          - '1781765794950'
+          - text
+          value_type: string
+          variable: llm_raw_output
+        - value_selector:
+          - '1781766750687'
+          - body
+          value_type: string
+          variable: settings_json
+      height: 52
+      id: '1781765768737'
+      position:
+        x: 1044.733832554064
+        y: 300.11313793452706
+      positionAbsolute:
+        x: 1044.733832554064
+        y: 300.11313793452706
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.1
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: f603fc8c-de7a-4928-aab9-2ac60cabceb0
+          role: system
+          text: "You analyze attached receipt images or PDFs and return only valid\
+            \ JSON for student expense claim prefilling.\n\nUse these inputs:\n[Fixed\
+            \ Identity]\n{{#1781765693442.fixed_identity_for_llm#}}\n\n[Allowed\
+            \ Options]\n{{#1781765693442.allowed_form_options#}}\n\n[Context]\n{{#1781765693442.enriched_context#}}\n\
+            \n[Uploaded File Summary]\n{{#1781765693442.upload_file_summary#}}\n\
+            \nRules:\n- Read all attached files with vision.\n- If multiple files\
+            \ are pages of the same receipt, combine them into one result.\n- If\
+            \ they are separate receipts, return one result per receipt.\n- Use only\
+            \ configured currencies and expense groups.\n- Never take contact_number\
+            \ from the receipt.\n- Prefer final paid total, not subtotal.\n- Prefer\
+            \ transaction date or receipt date.\n- If one clear single-day date exists,\
+            \ set date_end = date_from.\n- If uncertain, use null.\n- Do not output\
+            \ markdown or explanations outside JSON.\n\nReturn exactly one JSON object\
+            \ with this shape:\n{\n  \"results\": [\n    {\n      \"receipt_group_id\"\
+            : \"receipt_1\",\n      \"source_file_indices\": [0],\n      \"same_receipt\"\
+            : true,\n      \"predicted_input\": {\n        \"submitted_to\": {\n\
+            \          \"type\": \"Department\",\n          \"target\": \"CPEG Office\"\
+            \n        },\n        \"contact_number\": null,\n        \"supervisor_advisor_faculty\"\
+            : null,\n        \"date_from\": null,\n        \"date_end\": null,\n\
+            \        \"expense_detail\": {\n          \"expense_group\": null,\n\
+            \          \"business_purpose\": null,\n          \"expense_description\"\
+            : null,\n          \"currency\": null,\n          \"amount\": null,\n\
+            \          \"attach_receipt\": true,\n          \"declare_if_no_receipt\"\
+            : \"\"\n        }\n      },\n      \"llm_field_confidence\": {},\n  \
+            \    \"missing_fields\": [],\n      \"required_user_input_reason\": {},\n\
+            \      \"explanations\": []\n    }\n  ]\n}"
+        - id: 1dc7d42e-8065-4bf4-b7b7-6d8468f1b6ea
+          role: user
+          text: "Analyze the attached receipt files and return only the JSON object\
+            \ requested in the system instructions.\n\nImportant:\n- Read all attached\
+            \ files with vision.\n- Decide whether they are one receipt or multiple\
+            \ separate receipts.\n- If a field is uncertain, use null instead of\
+            \ guessing.\n- Do not return markdown.\n- Do not return explanations\
+            \ outside the JSON object."
+        selected: false
+        title: LLM-vision
+        type: llm
+        vision:
+          configs:
+            detail: low
+            variable_selector:
+            - '1781681523003'
+            - upload_files
+          enabled: true
+      height: 88
+      id: '1781765794950'
+      position:
+        x: 619.0413268587599
+        y: 306.08820979811185
+      positionAbsolute:
+        x: 619.0413268587599
+        y: 306.08820979811185
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\n\ndef main(\n    normalized_prediction=None,\n    normalized_llm_confidence=None,\n\
+          \    history_features=None,\n    field_sources=None,\n    settings_json=None,\n\
+          \    currencies=None,\n    expense_groups=None,\n    normalized_results=None,\n\
+          ):\n    def clean_string_list(values):\n        cleaned = []\n        seen\
+          \ = set()\n\n        for value in values or []:\n            if value is\
+          \ None:\n                continue\n            text = str(value).strip()\n\
+          \            if not text or text in seen:\n                continue\n  \
+          \          cleaned.append(text)\n            seen.add(text)\n\n        return\
+          \ cleaned\n\n    def parse_json_maybe(value, default):\n        if value\
+          \ is None:\n            return default\n        if isinstance(value, (dict,\
+          \ list)):\n            return value\n        if isinstance(value, str):\n\
+          \            text = value.strip()\n            if not text:\n          \
+          \      return default\n            try:\n                return json.loads(text)\n\
+          \            except json.JSONDecodeError:\n                return default\n\
+          \        return default\n\n    def clamp(value, lo=0.0, hi=1.0):\n     \
+          \   try:\n            value = float(value)\n        except (TypeError, ValueError):\n\
+          \            value = 0.0\n        return max(lo, min(hi, value))\n\n   \
+          \ def safe_float_or_none(value):\n        try:\n            if value is\
+          \ None or value == \"\":\n                return None\n            return\
+          \ float(value)\n        except (TypeError, ValueError):\n            return\
+          \ None\n\n    def get_nested_value(obj, dotted_key):\n        current =\
+          \ obj\n        for part in dotted_key.split(\".\"):\n            if not\
+          \ isinstance(current, dict):\n                return None\n            current\
+          \ = current.get(part)\n        return current\n\n    def load_settings_inline(settings_payload,\
+          \ currency_values, expense_group_values):\n        data = parse_json_maybe(settings_payload,\
+          \ {})\n        if not isinstance(data, dict):\n            data = {}\n\n\
+          \        allowed_currencies = {\n            value.upper()\n           \
+          \ for value in clean_string_list(\n                currency_values if currency_values\
+          \ is not None else data.get(\"currencies\", [])\n            )\n       \
+          \ }\n        allowed_expense_groups = set(\n            clean_string_list(\n\
+          \                expense_group_values\n                if expense_group_values\
+          \ is not None\n                else data.get(\"expense_groups\", [])\n \
+          \           )\n        )\n\n        return {\n            \"currencies\"\
+          : allowed_currencies,\n            \"expense_groups\": allowed_expense_groups,\n\
+          \        }\n\n    def normalize_currency(value):\n        settings = load_settings_inline(settings_json,\
+          \ currencies, expense_groups)\n        if value is None:\n            return\
+          \ None\n\n        text = str(value).strip().upper()\n        if not text:\n\
+          \            return None\n\n        return text if text in settings[\"currencies\"\
+          ] else None\n\n    def normalize_expense_group(value):\n        settings\
+          \ = load_settings_inline(settings_json, currencies, expense_groups)\n  \
+          \      if value is None:\n            return None\n\n        text = str(value).strip()\n\
+          \        if not text:\n            return None\n\n        return text if\
+          \ text in settings[\"expense_groups\"] else None\n\n    def mode_by_score(score):\n\
+          \        if score >= 0.85:\n            return \"prefill\"\n        if score\
+          \ >= 0.60:\n            return \"suggestion\"\n        return \"manual\"\
+          \n\n    feat = parse_json_maybe(history_features, {})\n\n    source_base_scores\
+          \ = {\n        \"receipt_explicit\": 0.96,\n        \"receipt_inferred\"\
+          : 0.84,\n        \"context_explicit\": 0.90,\n        \"context_inferred\"\
+          : 0.72,\n        \"llm\": 0.62,\n        \"history_stable\": 0.80,\n   \
+          \     \"history_default\": 0.60,\n        \"rule\": 0.93,\n        \"missing\"\
+          : 0.0,\n    }\n\n    fields = [\n        \"submitted_to.type\",\n      \
+          \  \"submitted_to.target\",\n        \"contact_number\",\n        \"supervisor_advisor_faculty\"\
+          ,\n        \"date_from\",\n        \"date_end\",\n        \"expense_detail.expense_group\"\
+          ,\n        \"expense_detail.business_purpose\",\n        \"expense_detail.expense_description\"\
+          ,\n        \"expense_detail.currency\",\n        \"expense_detail.amount\"\
+          ,\n        \"expense_detail.attach_receipt\",\n        \"expense_detail.declare_if_no_receipt\"\
+          ,\n    ]\n\n    weights = {\n        \"expense_detail.amount\": 1.6,\n \
+          \       \"expense_detail.currency\": 1.3,\n        \"expense_detail.expense_description\"\
+          : 1.2,\n        \"expense_detail.expense_group\": 1.2,\n        \"expense_detail.attach_receipt\"\
+          : 1.0,\n        \"expense_detail.business_purpose\": 1.1,\n        \"date_from\"\
+          : 1.1,\n        \"date_end\": 1.1,\n    }\n\n    def score_single_result(pred,\
+          \ llm, sources):\n        field_scores = {}\n\n        for field in fields:\n\
+          \            value = get_nested_value(pred, field)\n            source =\
+          \ sources.get(field, \"missing\")\n\n            if value is None or value\
+          \ == \"\":\n                if field == \"expense_detail.declare_if_no_receipt\"\
+          :\n                    attach_receipt = get_nested_value(pred, \"expense_detail.attach_receipt\"\
+          )\n                    field_scores[field] = 0.93 if attach_receipt is True\
+          \ else 0.0\n                else:\n                    field_scores[field]\
+          \ = 0.0\n                continue\n\n            base = source_base_scores.get(source,\
+          \ 0.40)\n            llm_conf = clamp(llm.get(field, 0.5))\n           \
+          \ field_scores[field] = clamp((0.80 * base) + (0.20 * llm_conf))\n\n   \
+          \     currency = get_nested_value(pred, \"expense_detail.currency\")\n \
+          \       if currency and normalize_currency(currency) is None:\n        \
+          \    field_scores[\"expense_detail.currency\"] = 0.0\n\n        expense_group\
+          \ = get_nested_value(pred, \"expense_detail.expense_group\")\n        if\
+          \ expense_group and normalize_expense_group(expense_group) is None:\n  \
+          \          field_scores[\"expense_detail.expense_group\"] = 0.0\n\n    \
+          \    amount = safe_float_or_none(get_nested_value(pred, \"expense_detail.amount\"\
+          ))\n        amount_source = sources.get(\"expense_detail.amount\", \"missing\"\
+          )\n        if amount is None:\n            field_scores[\"expense_detail.amount\"\
+          ] = 0.0\n        elif amount_source == \"receipt_explicit\":\n         \
+          \   field_scores[\"expense_detail.amount\"] = max(\n                field_scores.get(\"\
+          expense_detail.amount\", 0.0),\n                0.92,\n            )\n \
+          \       else:\n            stats = feat.get(\"amount_stats_by_expense_group\"\
+          , {}).get(expense_group) or feat.get(\n                \"amount_stats\"\
+          ,\n                {},\n            )\n            p25 = safe_float_or_none(stats.get(\"\
+          p25\")) if isinstance(stats, dict) else None\n            p75 = safe_float_or_none(stats.get(\"\
+          p75\")) if isinstance(stats, dict) else None\n            if p25 is not\
+          \ None and p75 is not None and not (p25 <= amount <= p75):\n           \
+          \     field_scores[\"expense_detail.amount\"] = min(\n                 \
+          \   field_scores.get(\"expense_detail.amount\", 0.0),\n                \
+          \    0.60,\n                )\n\n        attach_receipt = get_nested_value(pred,\
+          \ \"expense_detail.attach_receipt\")\n        if attach_receipt is True:\n\
+          \            field_scores[\"expense_detail.attach_receipt\"] = max(\n  \
+          \              field_scores.get(\"expense_detail.attach_receipt\", 0.0),\n\
+          \                0.92,\n            )\n\n        declaration = get_nested_value(pred,\
+          \ \"expense_detail.declare_if_no_receipt\")\n        if attach_receipt is\
+          \ True and declaration == \"\":\n            field_scores[\"expense_detail.declare_if_no_receipt\"\
+          ] = 0.93\n\n        display_mode = {\n            field: mode_by_score(score)\n\
+          \            for field, score in field_scores.items()\n        }\n\n   \
+          \     if display_mode.get(\"expense_detail.business_purpose\") == \"prefill\"\
+          :\n            display_mode[\"expense_detail.business_purpose\"] = \"suggestion\"\
+          \n\n        if display_mode.get(\"submitted_to.target\") == \"prefill\"\
+          :\n            display_mode[\"submitted_to.target\"] = \"suggestion\"\n\n\
+          \        numerator = 0.0\n        denominator = 0.0\n        for field,\
+          \ score in field_scores.items():\n            weight = weights.get(field,\
+          \ 1.0)\n            numerator += weight * score\n            denominator\
+          \ += weight\n\n        overall_score = clamp(numerator / denominator if\
+          \ denominator else 0.0)\n        return field_scores, display_mode, overall_score\n\
+          \n    parsed_results = parse_json_maybe(normalized_results, None)\n    if\
+          \ isinstance(parsed_results, list) and parsed_results:\n        results\
+          \ = parsed_results\n    else:\n        results = [{\n            \"predicted_input\"\
+          : parse_json_maybe(normalized_prediction, {}),\n            \"llm_field_confidence\"\
+          : parse_json_maybe(normalized_llm_confidence, {}),\n            \"field_sources\"\
+          : parse_json_maybe(field_sources, {}),\n            \"missing_fields\":\
+          \ [],\n            \"required_user_input_reason\": {},\n            \"explanations\"\
+          : [],\n        }]\n\n    scored_results = []\n    for result in results:\n\
+          \        result = result if isinstance(result, dict) else {}\n        pred\
+          \ = parse_json_maybe(result.get(\"predicted_input\", {}), {})\n        llm\
+          \ = parse_json_maybe(result.get(\"llm_field_confidence\", {}), {})\n   \
+          \     sources = parse_json_maybe(result.get(\"field_sources\", {}), {})\n\
+          \        field_scores, display_mode, overall_score = score_single_result(pred,\
+          \ llm, sources)\n        scored_results.append(\n            {\n       \
+          \         **result,\n                \"field_scores\": field_scores,\n \
+          \               \"display_mode\": display_mode,\n                \"overall_score\"\
+          : round(overall_score, 4),\n            }\n        )\n\n    first_result\
+          \ = scored_results[0]\n    overall_average = sum(item.get(\"overall_score\"\
+          , 0.0) for item in scored_results) / len(scored_results)\n\n    return {\n\
+          \        \"scored_results\": json.dumps(scored_results, ensure_ascii=False),\n\
+          \        \"field_scores\": json.dumps(first_result.get(\"field_scores\"\
+          , {}), ensure_ascii=False),\n        \"overall_score\": str(round(overall_average,\
+          \ 4)),\n        \"display_mode\": json.dumps(first_result.get(\"display_mode\"\
+          , {}), ensure_ascii=False),\n        \"field_sources\": json.dumps(first_result.get(\"\
+          field_sources\", {}), ensure_ascii=False),\n    }\n"
+        code_language: python3
+        outputs:
+          display_mode:
+            children: null
+            type: string
+          field_scores:
+            children: null
+            type: string
+          field_sources:
+            children: null
+            type: string
+          overall_score:
+            children: null
+            type: string
+          scored_results:
+            children: null
+            type: string
+        selected: false
+        title: Confidence Scorer
+        type: code
+        variables:
+        - value_selector:
+          - '1781765768737'
+          - normalized_prediction
+          value_type: string
+          variable: normalized_prediction
+        - value_selector:
+          - '1781765768737'
+          - normalized_llm_confidence
+          value_type: string
+          variable: normalized_llm_confidence
+        - value_selector:
+          - '1781765768737'
+          - field_sources
+          value_type: string
+          variable: field_sources
+        - value_selector:
+          - '1781765768737'
+          - normalized_results
+          value_type: string
+          variable: normalized_results
+        - value_selector:
+          - '1781766750687'
+          - body
+          value_type: string
+          variable: settings_json
+      height: 52
+      id: '1781766217894'
+      position:
+        x: 1346.733832554064
+        y: 306.08820979811185
+      positionAbsolute:
+        x: 1346.733832554064
+        y: 306.08820979811185
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\n\ndef main(\n    fixed_identity,\n    predicted_input=None,\n\
+          \    field_scores=None,\n    overall_score=None,\n    display_mode=None,\n\
+          \    explanations=None,\n    field_sources=None,\n    missing_fields=None,\n\
+          \    required_user_input_reason=None,\n    receipt_extraction=None,\n  \
+          \  scored_results=None,\n):\n    def parse_json_maybe(value, default):\n\
+          \        if value is None:\n            return default\n        if isinstance(value,\
+          \ (dict, list)):\n            return value\n        if isinstance(value,\
+          \ str):\n            text = value.strip()\n            if not text:\n  \
+          \              return default\n            try:\n                return\
+          \ json.loads(text)\n            except json.JSONDecodeError:\n         \
+          \       return default\n        return default\n\n    def safe_cell(value):\n\
+          \        if value is None:\n            return \"\"\n        if isinstance(value,\
+          \ bool):\n            text = \"true\" if value else \"false\"\n        elif\
+          \ isinstance(value, (dict, list)):\n            text = json.dumps(value,\
+          \ ensure_ascii=False)\n        else:\n            text = str(value)\n  \
+          \      return text.replace(\"\\n\", \" \").replace(\"\\r\", \" \").replace(\"\
+          |\", \"\\\\|\").strip()\n\n    def build_section(result, index):\n     \
+          \   pred = parse_json_maybe(result.get(\"predicted_input\", {}), {})\n \
+          \       scores = parse_json_maybe(result.get(\"field_scores\", {}), {})\n\
+          \        modes = parse_json_maybe(result.get(\"display_mode\", {}), {})\n\
+          \        sources = parse_json_maybe(result.get(\"field_sources\", {}), {})\n\
+          \        missing = parse_json_maybe(result.get(\"missing_fields\", []),\
+          \ [])\n        reasons = parse_json_maybe(result.get(\"required_user_input_reason\"\
+          , {}), {})\n        expl = parse_json_maybe(result.get(\"explanations\"\
+          , []), [])\n\n        expense = pred.get(\"expense_detail\", {})\n     \
+          \   submitted = pred.get(\"submitted_to\", {})\n        receipt_group_id\
+          \ = result.get(\"receipt_group_id\")\n        source_file_indices = parse_json_maybe(result.get(\"\
+          source_file_indices\", []), [])\n        same_receipt = result.get(\"same_receipt\"\
+          )\n\n        predicted_rows = [\n            (\"Receipt Group ID\", receipt_group_id),\n\
+          \            (\"Source File Indices\", source_file_indices),\n         \
+          \   (\"Same Receipt Group\", same_receipt),\n            (\"Submitted To\
+          \ Type\", submitted.get(\"type\")),\n            (\"Submitted To Target\"\
+          , submitted.get(\"target\")),\n            (\"Contact Number\", pred.get(\"\
+          contact_number\")),\n            (\"Supervisor / Advisor / Faculty\", pred.get(\"\
+          supervisor_advisor_faculty\")),\n            (\"Date From\", pred.get(\"\
+          date_from\")),\n            (\"Date End\", pred.get(\"date_end\")),\n  \
+          \          (\"Expense Group\", expense.get(\"expense_group\")),\n      \
+          \      (\"Business Purpose\", expense.get(\"business_purpose\")),\n    \
+          \        (\"Expense Description\", expense.get(\"expense_description\")),\n\
+          \            (\"Currency\", expense.get(\"currency\")),\n            (\"\
+          Amount\", expense.get(\"amount\")),\n            (\"Attach Receipt\", expense.get(\"\
+          attach_receipt\")),\n            (\"Declaration If No Receipt\", expense.get(\"\
+          declare_if_no_receipt\")),\n        ]\n\n        predicted_table_lines =\
+          \ [f\"Receipt {index}\", \"| Field | Predicted Value |\", \"|---|---|\"\
+          ]\n        for field, value in predicted_rows:\n            predicted_table_lines.append(f\"\
+          | {field} | {safe_cell(value)} |\")\n\n        preferred_order = [\n   \
+          \         \"submitted_to.type\",\n            \"submitted_to.target\",\n\
+          \            \"contact_number\",\n            \"supervisor_advisor_faculty\"\
+          ,\n            \"date_from\",\n            \"date_end\",\n            \"\
+          expense_detail.expense_group\",\n            \"expense_detail.business_purpose\"\
+          ,\n            \"expense_detail.expense_description\",\n            \"expense_detail.currency\"\
+          ,\n            \"expense_detail.amount\",\n            \"expense_detail.attach_receipt\"\
+          ,\n            \"expense_detail.declare_if_no_receipt\",\n        ]\n  \
+          \      confidence_table_lines = [\n            f\"Receipt {index}\",\n \
+          \           \"| Field | Score | Display Mode | Source |\",\n           \
+          \ \"|---|---:|---|---|\",\n        ]\n        for field in preferred_order:\n\
+          \            score = scores.get(field, \"\")\n            try:\n       \
+          \         score_display = f\"{float(score):.4f}\"\n            except (TypeError,\
+          \ ValueError):\n                score_display = safe_cell(score)\n     \
+          \       confidence_table_lines.append(\n                f\"| {safe_cell(field)}\
+          \ | {score_display} | {safe_cell(modes.get(field))} | {safe_cell(sources.get(field))}\
+          \ |\"\n            )\n\n        missing_table_lines = [f\"Receipt {index}\"\
+          , \"| Missing Field | Reason |\", \"|---|---|\"]\n        for field in missing\
+          \ if isinstance(missing, list) else []:\n            missing_table_lines.append(\n\
+          \                f\"| {safe_cell(field)} | {safe_cell(reasons.get(field))}\
+          \ |\"\n            )\n        if len(missing_table_lines) == 3:\n      \
+          \      missing_table_lines.append(\"| None | |\")\n\n        if isinstance(expl,\
+          \ list):\n            explanation_text = \"\\n\".join(f\"- {safe_cell(item)}\"\
+          \ for item in expl) if expl else \"- None\"\n        else:\n           \
+          \ explanation_text = safe_cell(expl)\n\n        return {\n            \"\
+          predicted_table\": \"\\n\".join(predicted_table_lines),\n            \"\
+          confidence_table\": \"\\n\".join(confidence_table_lines),\n            \"\
+          missing_table\": \"\\n\".join(missing_table_lines),\n            \"explanations\"\
+          : f\"Receipt {index}\\n{explanation_text}\",\n            \"full_section\"\
+          : \"\\n\\n\".join(\n                [\n                    f\"## Receipt\
+          \ {index}\",\n                    section_header_line(\"Predicted Form Input\"\
+          ),\n                    \"\\n\".join(predicted_table_lines[1:]),\n     \
+          \               section_header_line(\"Field-Level Confidence\"),\n     \
+          \               \"\\n\".join(confidence_table_lines[1:]),\n            \
+          \        section_header_line(\"Missing Fields\"),\n                    \"\
+          \\n\".join(missing_table_lines[1:]),\n                    section_header_line(\"\
+          Explanation\"),\n                    explanation_text,\n               \
+          \ ]\n            ),\n        }\n\n    def section_header_line(title):\n\
+          \        return f\"### {title}\"\n\n    identity = parse_json_maybe(fixed_identity,\
+          \ {})\n    receipt = parse_json_maybe(receipt_extraction, {})\n    parsed_scored_results\
+          \ = parse_json_maybe(scored_results, None)\n\n    if isinstance(parsed_scored_results,\
+          \ list) and parsed_scored_results:\n        predicted_sections = []\n  \
+          \      confidence_sections = []\n        missing_sections = []\n       \
+          \ explanation_sections = []\n\n        for index, result in enumerate(parsed_scored_results,\
+          \ start=1):\n            section = build_section(result, index)\n      \
+          \      predicted_sections.append(section[\"predicted_table\"])\n       \
+          \     confidence_sections.append(section[\"confidence_table\"])\n      \
+          \      missing_sections.append(section[\"missing_table\"])\n           \
+          \ explanation_sections.append(section[\"explanations\"])\n\n        receipt_sections\
+          \ = []\n        for index, result in enumerate(parsed_scored_results, start=1):\n\
+          \            receipt_sections.append(build_section(result, index)[\"full_section\"\
+          ])\n\n        return {\n            \"status\": \"success\",\n         \
+          \   \"pretty_fixed_identity\": json.dumps(identity, ensure_ascii=False,\
+          \ indent=2),\n            \"pretty_receipt_extraction\": json.dumps(receipt,\
+          \ ensure_ascii=False, indent=2),\n            \"pretty_predicted_table\"\
+          : \"\\n\\n\".join(predicted_sections),\n            \"pretty_confidence_table\"\
+          : \"\\n\\n\".join(confidence_sections),\n            \"pretty_missing_fields_table\"\
+          : \"\\n\\n\".join(missing_sections),\n            \"pretty_explanations\"\
+          : \"\\n\\n\".join(explanation_sections),\n            \"pretty_predicted_json\"\
+          : json.dumps(parsed_scored_results, ensure_ascii=False, indent=2),\n   \
+          \         \"pretty_field_scores_json\": json.dumps(parsed_scored_results,\
+          \ ensure_ascii=False, indent=2),\n            \"pretty_display_mode_json\"\
+          : json.dumps(parsed_scored_results, ensure_ascii=False, indent=2),\n   \
+          \         \"pretty_field_sources_json\": json.dumps(parsed_scored_results,\
+          \ ensure_ascii=False, indent=2),\n            \"pretty_missing_fields_json\"\
+          : json.dumps(parsed_scored_results, ensure_ascii=False, indent=2),\n   \
+          \         \"pretty_required_input_json\": json.dumps(parsed_scored_results,\
+          \ ensure_ascii=False, indent=2),\n            \"pretty_overall_score\":\
+          \ safe_cell(overall_score),\n            \"pretty_receipt_sections\": \"\
+          \\n\\n---\\n\\n\".join(receipt_sections),\n        }\n\n    pred = parse_json_maybe(predicted_input,\
+          \ {})\n    scores = parse_json_maybe(field_scores, {})\n    modes = parse_json_maybe(display_mode,\
+          \ {})\n    expl = parse_json_maybe(explanations, [])\n    sources = parse_json_maybe(field_sources,\
+          \ {})\n    missing = parse_json_maybe(missing_fields, [])\n    reasons =\
+          \ parse_json_maybe(required_user_input_reason, {})\n\n    expense = pred.get(\"\
+          expense_detail\", {})\n    submitted = pred.get(\"submitted_to\", {})\n\n\
+          \    predicted_rows = [\n        (\"Submitted To Type\", submitted.get(\"\
+          type\")),\n        (\"Submitted To Target\", submitted.get(\"target\")),\n\
+          \        (\"Contact Number\", pred.get(\"contact_number\")),\n        (\"\
+          Supervisor / Advisor / Faculty\", pred.get(\"supervisor_advisor_faculty\"\
+          )),\n        (\"Date From\", pred.get(\"date_from\")),\n        (\"Date\
+          \ End\", pred.get(\"date_end\")),\n        (\"Expense Group\", expense.get(\"\
+          expense_group\")),\n        (\"Business Purpose\", expense.get(\"business_purpose\"\
+          )),\n        (\"Expense Description\", expense.get(\"expense_description\"\
+          )),\n        (\"Currency\", expense.get(\"currency\")),\n        (\"Amount\"\
+          , expense.get(\"amount\")),\n        (\"Attach Receipt\", expense.get(\"\
+          attach_receipt\")),\n        (\"Declaration If No Receipt\", expense.get(\"\
+          declare_if_no_receipt\")),\n    ]\n\n    predicted_table_lines = [\"| Field\
+          \ | Predicted Value |\", \"|---|---|\"]\n    for field, value in predicted_rows:\n\
+          \        predicted_table_lines.append(f\"| {field} | {safe_cell(value)}\
+          \ |\")\n\n    preferred_order = [\n        \"submitted_to.type\",\n    \
+          \    \"submitted_to.target\",\n        \"contact_number\",\n        \"supervisor_advisor_faculty\"\
+          ,\n        \"date_from\",\n        \"date_end\",\n        \"expense_detail.expense_group\"\
+          ,\n        \"expense_detail.business_purpose\",\n        \"expense_detail.expense_description\"\
+          ,\n        \"expense_detail.currency\",\n        \"expense_detail.amount\"\
+          ,\n        \"expense_detail.attach_receipt\",\n        \"expense_detail.declare_if_no_receipt\"\
+          ,\n    ]\n    confidence_table_lines = [\"| Field | Score | Display Mode\
+          \ | Source |\", \"|---|---:|---|---|\"]\n    for field in preferred_order:\n\
+          \        score = scores.get(field, \"\")\n        try:\n            score_display\
+          \ = f\"{float(score):.4f}\"\n        except (TypeError, ValueError):\n \
+          \           score_display = safe_cell(score)\n        confidence_table_lines.append(\n\
+          \            f\"| {safe_cell(field)} | {score_display} | {safe_cell(modes.get(field))}\
+          \ | {safe_cell(sources.get(field))} |\"\n        )\n\n    missing_table_lines\
+          \ = [\"| Missing Field | Reason |\", \"|---|---|\"]\n    for field in missing\
+          \ if isinstance(missing, list) else []:\n        missing_table_lines.append(f\"\
+          | {safe_cell(field)} | {safe_cell(reasons.get(field))} |\")\n    if len(missing_table_lines)\
+          \ == 2:\n        missing_table_lines.append(\"| None | |\")\n\n    if isinstance(expl,\
+          \ list):\n        explanation_text = \"\\n\".join(f\"- {safe_cell(item)}\"\
+          \ for item in expl) if expl else \"- None\"\n    else:\n        explanation_text\
+          \ = safe_cell(expl)\n\n    try:\n        overall_score_display = f\"{float(overall_score):.4f}\"\
+          \n    except (TypeError, ValueError):\n        overall_score_display = safe_cell(overall_score)\n\
+          \n    return {\n        \"status\": \"success\" if pred else \"empty\",\n\
+          \        \"pretty_fixed_identity\": json.dumps(identity, ensure_ascii=False,\
+          \ indent=2),\n        \"pretty_receipt_extraction\": json.dumps(receipt,\
+          \ ensure_ascii=False, indent=2),\n        \"pretty_predicted_table\": \"\
+          \\n\".join(predicted_table_lines),\n        \"pretty_confidence_table\"\
+          : \"\\n\".join(confidence_table_lines),\n        \"pretty_missing_fields_table\"\
+          : \"\\n\".join(missing_table_lines),\n        \"pretty_explanations\": explanation_text,\n\
+          \        \"pretty_predicted_json\": json.dumps(pred, ensure_ascii=False,\
+          \ indent=2),\n        \"pretty_field_scores_json\": json.dumps(scores, ensure_ascii=False,\
+          \ indent=2),\n        \"pretty_display_mode_json\": json.dumps(modes, ensure_ascii=False,\
+          \ indent=2),\n        \"pretty_field_sources_json\": json.dumps(sources,\
+          \ ensure_ascii=False, indent=2),\n        \"pretty_missing_fields_json\"\
+          : json.dumps(missing, ensure_ascii=False, indent=2),\n        \"pretty_required_input_json\"\
+          : json.dumps(reasons, ensure_ascii=False, indent=2),\n        \"pretty_overall_score\"\
+          : overall_score_display,\n        \"pretty_receipt_sections\": \"\\n\\n\"\
+          .join(\n            [\n                \"## Receipt 1\",\n             \
+          \   \"### Predicted Form Input\",\n                \"\\n\".join(predicted_table_lines),\n\
+          \                \"### Field-Level Confidence\",\n                \"\\n\"\
+          .join(confidence_table_lines),\n                \"### Missing Fields\",\n\
+          \                \"\\n\".join(missing_table_lines),\n                \"\
+          ### Explanation\",\n                explanation_text,\n            ]\n \
+          \       ),\n    }\n"
+        code_language: python3
+        outputs:
+          pretty_confidence_table:
+            children: null
+            type: string
+          pretty_display_mode_json:
+            children: null
+            type: string
+          pretty_explanations:
+            children: null
+            type: string
+          pretty_field_scores_json:
+            children: null
+            type: string
+          pretty_field_sources_json:
+            children: null
+            type: string
+          pretty_fixed_identity:
+            children: null
+            type: string
+          pretty_missing_fields_json:
+            children: null
+            type: string
+          pretty_missing_fields_table:
+            children: null
+            type: string
+          pretty_overall_score:
+            children: null
+            type: string
+          pretty_predicted_json:
+            children: null
+            type: string
+          pretty_predicted_table:
+            children: null
+            type: string
+          pretty_receipt_extraction:
+            children: null
+            type: string
+          pretty_receipt_sections:
+            children: null
+            type: string
+          pretty_required_input_json:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+        selected: true
+        title: output pretty
+        type: code
+        variables:
+        - value_selector:
+          - '1781765693442'
+          - fixed_identity
+          value_type: string
+          variable: fixed_identity
+        - value_selector:
+          - '1781765768737'
+          - normalized_prediction
+          value_type: string
+          variable: predicted_input
+        - value_selector:
+          - '1781766217894'
+          - field_scores
+          value_type: string
+          variable: field_scores
+        - value_selector:
+          - '1781766217894'
+          - overall_score
+          value_type: string
+          variable: overall_score
+        - value_selector:
+          - '1781766217894'
+          - display_mode
+          value_type: string
+          variable: display_mode
+        - value_selector:
+          - '1781765768737'
+          - explanations
+          value_type: string
+          variable: explanations
+        - value_selector:
+          - '1781766217894'
+          - field_sources
+          value_type: string
+          variable: field_sources
+        - value_selector:
+          - '1781766217894'
+          - scored_results
+          value_type: string
+          variable: scored_results
+      height: 52
+      id: '1781766285748'
+      position:
+        x: 1648.733832554064
+        y: 306.08820979811185
+      positionAbsolute:
+        x: 1648.733832554064
+        y: 306.08820979811185
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        selected: false
+        template: '# Student Expense Claim Prediction
+
+
+          ## Status
+
+
+          ✅ {{ status }}
+
+
+          ---
+
+
+          ## Fixed Identity
+
+
+          ```json
+
+          {{ pretty_fixed_identity }}
+
+          ```
+
+
+          ---
+
+
+          ## Predicted Form Input
+
+
+          {{ pretty_receipt_sections }}
+
+
+          ---
+
+
+          ## Overall Confidence
+
+
+          **{{ pretty_overall_score }}**
+
+
+          ---
+
+
+          ## Raw Predicted JSON
+
+
+          ```json
+
+          {{ pretty_predicted_json }}
+
+          ```
+
+          '
+        title: output template
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1781766285748'
+          - status
+          value_type: string
+          variable: status
+        - value_selector:
+          - '1781766285748'
+          - pretty_fixed_identity
+          value_type: string
+          variable: pretty_fixed_identity
+        - value_selector:
+          - '1781766285748'
+          - pretty_receipt_extraction
+          value_type: string
+          variable: pretty_receipt_extraction
+        - value_selector:
+          - '1781766285748'
+          - pretty_predicted_table
+          value_type: string
+          variable: pretty_predicted_table
+        - value_selector:
+          - '1781766285748'
+          - pretty_confidence_table
+          value_type: string
+          variable: pretty_confidence_table
+        - value_selector:
+          - '1781766285748'
+          - pretty_missing_fields_table
+          value_type: string
+          variable: pretty_missing_fields_table
+        - value_selector:
+          - '1781766285748'
+          - pretty_explanations
+          value_type: string
+          variable: pretty_explanations
+        - value_selector:
+          - '1781766285748'
+          - pretty_predicted_json
+          value_type: string
+          variable: pretty_predicted_json
+        - value_selector:
+          - '1781766285748'
+          - pretty_field_scores_json
+          value_type: string
+          variable: pretty_field_scores_json
+        - value_selector:
+          - '1781766285748'
+          - pretty_display_mode_json
+          value_type: string
+          variable: pretty_display_mode_json
+        - value_selector:
+          - '1781766285748'
+          - pretty_field_sources_json
+          value_type: string
+          variable: pretty_field_sources_json
+        - value_selector:
+          - '1781766285748'
+          - pretty_overall_score
+          value_type: string
+          variable: pretty_overall_score
+        - value_selector:
+          - '1781766285748'
+          - pretty_receipt_sections
+          value_type: string
+          variable: pretty_receipt_sections
+      height: 52
+      id: '1781766431547'
+      position:
+        x: 1922.6306308412163
+        y: 313.9486919838799
+      positionAbsolute:
+        x: 1922.6306308412163
+        y: 313.9486919838799
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1781766431547'
+          - output
+          value_type: string
+          variable: output
+        selected: false
+        title: Output 2
+        type: end
+      height: 88
+      id: '1781766499588'
+      position:
+        x: 2252.733832554064
+        y: 306.08820979811185
+      positionAbsolute:
+        x: 2252.733832554064
+        y: 306.08820979811185
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        headers: ''
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP Request
+        type: http-request
+        url: https://raw.githubusercontent.com/sunnyhyw1225/dify-code-node/main/setting.json
+        variables: []
+      height: 153
+      id: '1781766750687'
+      position:
+        x: -383.09592740832295
+        y: 313.9486919838799
+      positionAbsolute:
+        x: -383.09592740832295
+        y: 313.9486919838799
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: -1043.037817076268
+      y: 114.29337609423982
+      zoom: 0.8105526475273553
+  rag_pipeline_variables: []

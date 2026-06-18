@@ -26,6 +26,32 @@ Fields that are not supported by the receipt and must remain null or require use
 The uploaded files attached to this LLM call are the primary evidence.
 You must read the attached image or PDF directly with vision.
 
+[Multiple File Handling]
+If multiple files or images are attached, first determine whether they belong to:
+- one single receipt split across multiple images or pages
+- multiple separate receipts
+
+Treat files as the same receipt only when the visible evidence strongly indicates continuity, such as:
+- same merchant and same transaction
+- same invoice or receipt number
+- same date and matching totals or line items
+- front/back, page 1/page 2, or sequential pages of one invoice
+
+Treat files as separate receipts when they show different merchants, different transaction times, different receipt numbers, different totals for unrelated purchases, or otherwise independent transactions.
+
+If they are the same receipt:
+- combine them into one result
+- include all relevant file indices in source_file_indices
+- set same_receipt to true
+
+If they are separate receipts:
+- return one result object per distinct receipt
+- each result must describe only one receipt
+- set same_receipt to false for each separate receipt result unless a result itself combines multiple files from the same receipt
+
+Use the 0-based order from [Uploaded File Summary] for source_file_indices.
+If there is only one uploaded file, return exactly one result with source_file_indices set to [0].
+
 [Most Important Rules]
 Return only valid JSON.
 Do not return markdown, comments, explanations outside JSON, or code fences.
@@ -38,6 +64,8 @@ expense_detail.expense_group must be one of the configured expense groups.
 
 [How to Use the Receipt]
 Treat the attached receipt as the main source for:
+- date_from
+- date_end
 - expense_detail.amount
 - expense_detail.currency
 - expense_detail.expense_description
@@ -77,10 +105,11 @@ A. Conservative Defaults
 These fields may use simple conservative defaults when current context does not specify them:
 submitted_to.type
 submitted_to.target
-expense_detail.book_rate
 
 B. Receipt-Derived Fields
 These fields should primarily come from receipt evidence:
+- date_from
+- date_end
 - expense_detail.currency
 - expense_detail.amount
 - expense_detail.expense_description
@@ -90,7 +119,6 @@ C. Context-Dependent Fields
 These fields may use receipt evidence plus current context:
 - expense_detail.expense_group
 - expense_detail.business_purpose
-- expense_detail.equivalent_hkd_amount
 - expense_detail.declare_if_no_receipt
 
 [Field Filling Rules]
@@ -106,10 +134,24 @@ submitted_to.target confidence must not exceed submitted_to.type confidence.
 
 contact_number:
 Use it only if current context explicitly provides it.
+Never extract or infer it from the receipt, merchant contact details, store phone number, invoice hotline, or payment slip.
 Otherwise return null.
 
 supervisor_advisor_faculty:
 Use it only if current context explicitly provides it.
+Otherwise return null.
+
+date_from:
+Use the receipt transaction date, service start date, check-in date, travel date, or earliest clearly relevant expense date.
+If the receipt shows only one clear date for a single-day expense, use that date.
+Return the date in ISO format YYYY-MM-DD when possible.
+If no clear start date is visible, return null.
+
+date_end:
+Use the receipt service end date, check-out date, travel end date, or latest clearly relevant expense date.
+If the receipt shows only one clear date for a single-day expense, set date_end equal to date_from.
+Return the date in ISO format YYYY-MM-DD when possible.
+If no clear end date is visible but date_from is a single-day transaction date, date_end may equal date_from.
 Otherwise return null.
 
 expense_detail.currency:
@@ -122,15 +164,6 @@ Do not default to HKD just because it is common.
 expense_detail.amount:
 Use a number only if the receipt explicitly provides a clear final claimed amount.
 If the receipt amount is ambiguous, inconsistent, or missing, return null.
-
-expense_detail.book_rate:
-If currency is "HKD", book_rate must be 1.0.
-If the receipt or current context explicitly provides a reliable exchange rate for a non-HKD currency, use it.
-Otherwise return null for non-HKD currencies.
-
-expense_detail.equivalent_hkd_amount:
-If amount and book_rate are both available, calculate amount * book_rate and round to 2 decimal places.
-If either amount or book_rate is missing, return null.
 
 expense_detail.attach_receipt:
 If attached receipt files are visible and readable, this should normally be true.
@@ -202,52 +235,64 @@ Use this scale:
 [Hard Confidence Limits]
 If amount is not explicitly supported by receipt evidence, expense_detail.amount confidence must be 0.0.
 If currency is not explicitly supported by receipt evidence, expense_detail.currency confidence must not exceed 0.40.
+If date_from is not explicitly supported by receipt evidence, date_from confidence must not exceed 0.40.
+If date_end is copied from date_from for a single-day receipt, date_end confidence must not exceed date_from confidence.
 If business_purpose is null, confidence must be 0.0.
 If expense_description is null, confidence must be 0.0.
 If contact_number is null, confidence must be 0.0.
-equivalent_hkd_amount confidence must not exceed the lower confidence of amount and book_rate.
 submitted_to.target confidence must not exceed submitted_to.type confidence.
 
 [Output Requirements]
 Return exactly one JSON object with this schema:
 {
-  "predicted_input": {
-    "submitted_to": {
-      "type": "Department",
-      "target": "CPEG Office"
-    },
-    "contact_number": null,
-    "supervisor_advisor_faculty": null,
-    "expense_detail": {
-      "expense_group": null,
-      "business_purpose": null,
-      "expense_description": null,
-      "currency": null,
-      "amount": null,
-      "book_rate": null,
-      "equivalent_hkd_amount": null,
-      "attach_receipt": true,
-      "declare_if_no_receipt": ""
+  "results": [
+    {
+      "receipt_group_id": "receipt_1",
+      "source_file_indices": [0],
+      "same_receipt": true,
+      "predicted_input": {
+        "submitted_to": {
+          "type": "Department",
+          "target": "CPEG Office"
+        },
+        "contact_number": null,
+        "supervisor_advisor_faculty": null,
+        "date_from": null,
+        "date_end": null,
+        "expense_detail": {
+          "expense_group": null,
+          "business_purpose": null,
+          "expense_description": null,
+          "currency": null,
+          "amount": null,
+          "attach_receipt": true,
+          "declare_if_no_receipt": ""
+        }
+      },
+      "llm_field_confidence": {
+        "submitted_to.type": 0.0,
+        "submitted_to.target": 0.0,
+        "contact_number": 0.0,
+        "supervisor_advisor_faculty": 0.0,
+        "date_from": 0.0,
+        "date_end": 0.0,
+        "expense_detail.expense_group": 0.0,
+        "expense_detail.business_purpose": 0.0,
+        "expense_detail.expense_description": 0.0,
+        "expense_detail.currency": 0.0,
+        "expense_detail.amount": 0.0,
+        "expense_detail.attach_receipt": 0.0,
+        "expense_detail.declare_if_no_receipt": 0.0
+      },
+      "missing_fields": [],
+      "required_user_input_reason": {},
+      "explanations": [
+        "Briefly explain the main basis for the prediction. Maximum 3 explanations."
+      ]
     }
-  },
-  "llm_field_confidence": {
-    "submitted_to.type": 0.0,
-    "submitted_to.target": 0.0,
-    "contact_number": 0.0,
-    "supervisor_advisor_faculty": 0.0,
-    "expense_detail.expense_group": 0.0,
-    "expense_detail.business_purpose": 0.0,
-    "expense_detail.expense_description": 0.0,
-    "expense_detail.currency": 0.0,
-    "expense_detail.amount": 0.0,
-    "expense_detail.book_rate": 0.0,
-    "expense_detail.equivalent_hkd_amount": 0.0,
-    "expense_detail.attach_receipt": 0.0,
-    "expense_detail.declare_if_no_receipt": 0.0
-  },
-  "missing_fields": [],
-  "required_user_input_reason": {},
-  "explanations": [
-    "Briefly explain the main basis for the prediction. Maximum 3 explanations."
   ]
 }
+
+Return one item in results for each distinct receipt.
+Do not merge unrelated receipts into one result.
+Do not split one multi-page receipt into multiple results.

@@ -112,7 +112,7 @@ def main(
     }
 
     return {
-        "fixed_identity": fixed_identity,
+        "fixed_identity": json.dumps(fixed_identity, ensure_ascii=False),
         "fixed_identity_for_llm": json.dumps(fixed_identity, ensure_ascii=False),
         "allowed_form_options": json.dumps(
             {

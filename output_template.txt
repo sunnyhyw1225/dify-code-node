@@ -1,0 +1,33 @@
+# Student Expense Claim Prediction
+
+## Status
+
+✅ {{ status }}
+
+---
+
+## Fixed Identity
+
+```json
+{{ pretty_fixed_identity }}
+```
+
+---
+
+## Predicted Form Input
+
+{{ pretty_receipt_sections }}
+
+---
+
+## Overall Confidence
+
+**{{ pretty_overall_score }}**
+
+---
+
+## Raw Predicted JSON
+
+```json
+{{ pretty_predicted_json }}
+```
