@@ -2,7 +2,7 @@
 
 ## How to use?
 
-go to folder `new`, download the Dify DSL file `student-expense-claim-form-v2.yml`
+Download the Dify DSL file `student-expense-claim-form-v2.yml`
 
 Go to Dify -> Studio -> Import DSL.
 
