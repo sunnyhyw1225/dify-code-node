@@ -1,0 +1,863 @@
+app:
+  description: ''
+  icon: 📄
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: student-expense-claim-form
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/gemini:0.8.4@23aed1fa4d2c8015337bd18efa28b3dccf5b7309a83b1501541fb7358518faec
+    version: null
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.4.2@21195ee1321849e0a7d4b3f6b2fd8c2be23ea6c7182e1b444ecc4c1711b52468
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: template-transform
+        targetType: end
+      id: 1781684888899-source-1781683719402-target
+      selected: false
+      source: '1781684888899'
+      sourceHandle: source
+      target: '1781683719402'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: template-transform
+        targetType: end
+      id: 1781766431547-source-1781766499588-target
+      selected: false
+      source: '1781766431547'
+      sourceHandle: source
+      target: '1781766499588'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1781766750687-source-1781765794950-target
+      selected: false
+      source: '1781766750687'
+      sourceHandle: source
+      target: '1781765794950'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1781765794950-source-1781766217894-target
+      selected: false
+      source: '1781765794950'
+      sourceHandle: source
+      target: '1781766217894'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: code
+      id: 1781681523003-source-1782094188525-target
+      selected: false
+      source: '1781681523003'
+      sourceHandle: source
+      target: '1782094188525'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1782094188525-source-1782089700324-target
+      selected: false
+      source: '1782094188525'
+      sourceHandle: source
+      target: '1782089700324'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: http-request
+      id: 1782089700324-source-1781766750687-target
+      selected: false
+      source: '1782089700324'
+      sourceHandle: source
+      target: '1781766750687'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1781766217894-source-1782095452465-target
+      source: '1781766217894'
+      sourceHandle: source
+      target: '1782095452465'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: User Input
+        type: start
+        variables:
+        - default: HON, Sunny
+          hint: ''
+          label: Requestor
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: requestor
+        - default: ITSO
+          hint: ''
+          label: Department
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: department
+        - default: abc@connect.ust.hk
+          hint: ''
+          label: Email
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: email
+        - default: '21000001'
+          hint: ''
+          label: Student ID
+          options: []
+          placeholder: ''
+          required: true
+          type: number
+          variable: student_id
+        - default: Specific Endorser
+          hint: ''
+          label: Submit To (Type)
+          options:
+          - Specific Endorser
+          - Department
+          placeholder: ''
+          required: true
+          type: select
+          variable: submitted_to_type
+        - default: ccadc
+          hint: ''
+          label: Submit To (target)
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: submitted_to_target
+        - default: '81234567'
+          hint: ''
+          label: Contact number
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: contact_number
+        - default: Prof. Tim W
+          hint: ''
+          label: Supervisor / Advisor / Faculty
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: supervisor_advisor_faculty
+        - allowed_file_extensions:
+          - .pdf
+          - .jpg
+          - .jpeg
+          - .png
+          allowed_file_types:
+          - custom
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          default: ''
+          hide: false
+          hint: ''
+          label: Please upload receipts
+          max_length: 5
+          options: []
+          placeholder: ''
+          required: true
+          type: file-list
+          variable: upload_files
+      height: 317
+      id: '1781681523003'
+      position:
+        x: -736.7060543469822
+        y: 279.11313793452706
+      positionAbsolute:
+        x: -736.7060543469822
+        y: 279.11313793452706
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1781684888899'
+          - output
+          value_type: string
+          variable: output
+        selected: false
+        title: Output
+        type: end
+      height: 88
+      id: '1781683719402'
+      position:
+        x: 4459.609481944996
+        y: 274.6650833742858
+      positionAbsolute:
+        x: 4459.609481944996
+        y: 274.6650833742858
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        selected: false
+        template: '# Student Expense Claim Prediction
+
+
+          ## Status
+
+
+          ✅ {{ status }}
+
+
+          ---
+
+
+          ## Fixed Identity
+
+
+          ```json
+
+          {{ pretty_fixed_identity }}
+
+          ```
+
+
+          ---
+
+
+          ## Predicted Form Input
+
+
+          {{ pretty_predicted_table }}
+
+
+          ---
+
+
+          ## Overall Confidence
+
+
+          **{{ pretty_overall_score }}**
+
+
+          ---
+
+
+          ## Field-Level Confidence
+
+
+          {{ pretty_confidence_table }}
+
+
+          ---
+
+
+          ## Explanation
+
+
+          {{ pretty_explanations }}
+
+
+          ---
+
+
+          ## Raw Predicted JSON
+
+
+          ```json
+
+          {{ pretty_predicted_json }}
+
+          ```
+
+          '
+        title: output formatter
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1781684995524'
+          - status
+          value_type: string
+          variable: status
+        - value_selector:
+          - '1781684995524'
+          - pretty_fixed_identity
+          value_type: object
+          variable: pretty_fixed_identity
+        - value_selector:
+          - '1781684995524'
+          - pretty_predicted_table
+          value_type: string
+          variable: pretty_predicted_table
+        - value_selector:
+          - '1781684995524'
+          - pretty_confidence_table
+          value_type: string
+          variable: pretty_confidence_table
+        - value_selector:
+          - '1781684995524'
+          - pretty_explanations
+          value_type: string
+          variable: pretty_explanations
+        - value_selector:
+          - '1781684995524'
+          - pretty_predicted_json
+          value_type: object
+          variable: pretty_predicted_json
+        - value_selector:
+          - '1781684995524'
+          - pretty_field_scores_json
+          value_type: object
+          variable: pretty_field_scores_json
+        - value_selector:
+          - '1781684995524'
+          - pretty_display_mode_json
+          value_type: object
+          variable: pretty_display_mode_json
+        - value_selector:
+          - '1781684995524'
+          - pretty_overall_score
+          value_type: string
+          variable: pretty_overall_score
+      height: 52
+      id: '1781684888899'
+      position:
+        x: 4097.796208131655
+        y: 286.26338694427176
+      positionAbsolute:
+        x: 4097.796208131655
+        y: 286.26338694427176
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            frequency_penalty: 0.3
+            presence_penalty: 0.2
+            temperature: 0.5
+            top_p: 0.85
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: f603fc8c-de7a-4928-aab9-2ac60cabceb0
+          role: system
+          text: "You are a Student Expense Claim Prefill Assistant.\n\nYou receive\
+            \ receipt facts extracted by another model. Convert them into receipt-related\
+            \ claim-form fields.\n\nReturn ONLY valid JSON. Do not include markdown,\
+            \ comments, explanations, or code fences.\n\nUse only:\n1. Extracted Receipt\
+            \ JSON\n2. Allowed Form Options\n\n[Extracted Receipt JSON]\n{{#1782089700324.text#}}\n\
+            \n[Allowed Form Options]\n{{#1781766750687.body#}}\n\nRules:\n- Do not\
+            \ invent facts.\n- Use only configured values for expense_detail.currency\
+            \ and expense_detail.expense_group.\n- If a field is unsupported, return\
+            \ null.\n\nField rules:\n- expense_detail.expense_description: Use a concise\
+            \ factual description from the merchant and visible items/services.\n\
+            - expense_detail.expense_group: Choose exactly one value from the configured\
+            \ expense groups in Allowed Form Options. Select the best semantic match\
+            \ based on the merchant, item names, service description, and receipt\
+            \ summary. If no configured group is clearly suitable, return null.\n\
+            - expense_detail.business_purpose: Use only when the extracted receipt\
+            \ JSON clearly provides an academic or business purpose. Otherwise null.\n\
+            \nMissing fields:\n- Add a field path to missing_fields when the field\
+            \ is required but cannot be reliably filled.\n- Add a short reason in\
+            \ required_user_input_reason.\n\nReturn exactly this JSON structure:\n\
+            \n{\n  \"results\": [\n    {\n      \"predicted_input\": {\n        \"\
+            expense_detail\": {\n          \"expense_group\": null,\n          \"\
+            business_purpose\": null,\n          \"expense_description\": null,\n\
+            \        }\n      },\n      \"missing_fields\": [],\n      \"required_user_input_reason\"\
+            : {}\n    }\n  ]\n}"
+        selected: false
+        title: LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1781765794950'
+      position:
+        x: 1174.8101504016317
+        y: 335.1779403349598
+      positionAbsolute:
+        x: 1174.8101504016317
+        y: 335.1779403349598
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\n\ndef parse_json(value, fallback):\n    if value is\
+          \ None:\n        return fallback\n\n    if isinstance(value, (dict, list)):\n\
+          \        return value\n\n    if isinstance(value, str):\n        value =\
+          \ value.strip()\n\n        if value.startswith(\"```\"):\n            value\
+          \ = value.strip(\"`\")\n            value = value.replace(\"json\\n\", \"\
+          \", 1).replace(\"JSON\\n\", \"\", 1).strip()\n\n        try:\n         \
+          \   return json.loads(value)\n        except Exception:\n            return\
+          \ fallback\n\n    return fallback\n\n\ndef clean(value, default=\"\"):\n\
+          \    if value is None:\n        return default\n\n    value = str(value).strip()\n\
+          \n    if value == \"\":\n        return default\n\n    return value\n\n\n\
+          def get_first_receipt(gemini_data):\n    if isinstance(gemini_data, dict):\n\
+          \        receipts = gemini_data.get(\"receipts\")\n        if isinstance(receipts,\
+          \ list) and receipts:\n            return receipts[0]\n        return gemini_data\n\
+          \n    if isinstance(gemini_data, list) and gemini_data:\n        return\
+          \ gemini_data[0]\n\n    return {}\n\n\ndef get_llm_expense_detail(llm_data):\n\
+          \    try:\n        return (\n            llm_data\n            .get(\"results\"\
+          , [{}])[0]\n            .get(\"predicted_input\", {})\n            .get(\"\
+          expense_detail\", {})\n        )\n    except Exception:\n        return\
+          \ {}\n\n\ndef get_llm_missing_fields(llm_data):\n    try:\n        return\
+          \ llm_data.get(\"results\", [{}])[0].get(\"missing_fields\", [])\n    except\
+          \ Exception:\n        return []\n\n\ndef extract_file_refs(receipt_file):\n\
+          \    \"\"\"\n    Converts Dify file array into filename/URL list.\n\n  \
+          \  Supports:\n    - list of file objects\n    - JSON string list\n    -\
+          \ single file object\n    - plain string\n    \"\"\"\n\n    files = parse_json(receipt_file,\
+          \ receipt_file)\n\n    if files in [None, \"\"]:\n        return []\n\n\
+          \    if isinstance(files, str):\n        return [files]\n\n    if isinstance(files,\
+          \ dict):\n        ref = (\n            files.get(\"url\")\n            or\
+          \ files.get(\"remote_url\")\n            or files.get(\"signed_url\")\n\
+          \            or files.get(\"name\")\n            or files.get(\"filename\"\
+          )\n            or files.get(\"file_name\")\n        )\n        return [ref]\
+          \ if ref else []\n\n    if isinstance(files, list):\n        refs = []\n\
+          \n        for file_obj in files:\n            if isinstance(file_obj, str):\n\
+          \                refs.append(file_obj)\n            elif isinstance(file_obj,\
+          \ dict):\n                ref = (\n                    file_obj.get(\"url\"\
+          )\n                    or file_obj.get(\"remote_url\")\n               \
+          \     or file_obj.get(\"signed_url\")\n                    or file_obj.get(\"\
+          name\")\n                    or file_obj.get(\"filename\")\n           \
+          \         or file_obj.get(\"file_name\")\n                )\n\n        \
+          \        if ref:\n                    refs.append(ref)\n\n        return\
+          \ refs\n\n    return []\n\n\ndef main(\n    llm_claim_json: str,\n    gemini_ocr_json:\
+          \ str,\n    history_json: str,\n    receipt_file\n) -> dict:\n\n    llm_data\
+          \ = parse_json(llm_claim_json, {\"results\": []})\n    gemini_data = parse_json(gemini_ocr_json,\
+          \ {})\n    history = parse_json(history_json, {})\n\n    receipt = get_first_receipt(gemini_data)\n\
+          \    llm_expense = get_llm_expense_detail(llm_data)\n\n    file_refs = extract_file_refs(receipt_file)\n\
+          \n    submitted_to = history.get(\"submitted_to\", {})\n\n    date_start\
+          \ = clean(\n        receipt.get(\"transaction_date_start\")\n        or\
+          \ receipt.get(\"transaction_date\")\n        or receipt.get(\"date\")\n\
+          \    )\n\n    date_end = clean(\n        receipt.get(\"transaction_date_end\"\
+          )\n        or receipt.get(\"date_end\")\n    )\n\n    if date_start and\
+          \ not date_end:\n        date_end = date_start\n\n    currency = clean(receipt.get(\"\
+          currency\"))\n\n    amount = clean(\n        receipt.get(\"amount_paid\"\
+          )\n        or receipt.get(\"total\")\n        or receipt.get(\"grand_total\"\
+          )\n    )\n\n    expense_description = clean(llm_expense.get(\"expense_description\"\
+          ))\n    expense_group = clean(llm_expense.get(\"expense_group\"))\n    business_purpose\
+          \ = clean(llm_expense.get(\"business_purpose\"))\n\n    missing_fields =\
+          \ get_llm_missing_fields(llm_data)\n\n    if not isinstance(missing_fields,\
+          \ list):\n        missing_fields = []\n\n    required_checks = {\n     \
+          \   \"transaction_date_start\": date_start,\n        \"currency\": currency,\n\
+          \        \"amount\": amount,\n        \"expense_description\": expense_description,\n\
+          \        \"expense_group\": expense_group,\n        \"business_purpose\"\
+          : business_purpose\n    }\n\n    for field, value in required_checks.items():\n\
+          \        if value == \"\" and field not in missing_fields:\n           \
+          \ missing_fields.append(field)\n\n    final_output = {\n        \"requestor\"\
+          : clean(history.get(\"requestor\") or history.get(\"fixed_identity\", {}).get(\"\
+          requestor\")),\n        \"department\": clean(history.get(\"department\"\
+          ) or history.get(\"fixed_identity\", {}).get(\"department\")),\n       \
+          \ \"email\": clean(history.get(\"email\") or history.get(\"fixed_identity\"\
+          , {}).get(\"email\")),\n        \"student_id\": clean(history.get(\"student_id\"\
+          ) or history.get(\"fixed_identity\", {}).get(\"student_id\")),\n       \
+          \ \"contact_number\": clean(history.get(\"contact_number\")),\n        \"\
+          supervisor_advisor_faculty\": clean(history.get(\"supervisor_advisor_faculty\"\
+          )),\n        \"submitted_to\": {\n            \"type\": clean(submitted_to.get(\"\
+          type\"), \"null\"),\n            \"target\": clean(submitted_to.get(\"target\"\
+          ), \"null\")\n        },\n        \"receipts\": [\n            {\n     \
+          \           \"transaction_date_start\": date_start,\n                \"\
+          transaction_date_end\": date_end,\n                \"expense_description\"\
+          : expense_description,\n                \"currency\": currency,\n      \
+          \          \"amount\": amount,\n                \"expense_group\": expense_group,\n\
+          \                \"business_purpose\": business_purpose,\n             \
+          \   \"attach_receipt\": file_refs,\n                \"missing_fields\":\
+          \ missing_fields\n            }\n        ]\n    }\n\n    return {\n    \
+          \    \"final_claim_json\": json.dumps(final_output, ensure_ascii=False)\n\
+          \    }"
+        code_language: python3
+        outputs:
+          final_claim_json:
+            children: null
+            type: string
+        selected: false
+        title: combine
+        type: code
+        variables:
+        - value_selector:
+          - '1781765794950'
+          - text
+          value_type: string
+          variable: llm_claim_json
+        - value_selector:
+          - '1782089700324'
+          - text
+          value_type: string
+          variable: gemini_ocr_json
+        - value_selector:
+          - '1782094188525'
+          - history_json
+          value_type: string
+          variable: history_json
+        - value_selector:
+          - '1781681523003'
+          - upload_files
+          value_type: array[file]
+          variable: receipt_file
+      height: 52
+      id: '1781766217894'
+      position:
+        x: 1874.9846028761456
+        y: 320.9100440989893
+      positionAbsolute:
+        x: 1874.9846028761456
+        y: 320.9100440989893
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        selected: false
+        template: '```json
+
+          {{ final_claim_json }}
+
+          ```'
+        title: output template
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1781766217894'
+          - final_claim_json
+          value_type: string
+          variable: final_claim_json
+      height: 52
+      id: '1781766431547'
+      position:
+        x: 2546.8162914126674
+        y: 311.8113976520371
+      positionAbsolute:
+        x: 2546.8162914126674
+        y: 311.8113976520371
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1781766431547'
+          - output
+          value_type: string
+          variable: output
+        selected: false
+        title: Output 2
+        type: end
+      height: 88
+      id: '1781766499588'
+      position:
+        x: 2904.215432466372
+        y: 320.9100440989893
+      positionAbsolute:
+        x: 2904.215432466372
+        y: 320.9100440989893
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        headers: ''
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP Request
+        type: http-request
+        url: https://raw.githubusercontent.com/sunnyhyw1225/dify-code-node/main/setting.json
+        variables: []
+      height: 153
+      id: '1781766750687'
+      position:
+        x: 714.22116606199
+        y: 351.51744988419813
+      positionAbsolute:
+        x: 714.22116606199
+        y: 351.51744988419813
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.4
+          mode: chat
+          name: gemini-2.5-flash
+          provider: langgenius/gemini/google
+        prompt_template:
+        - id: 1e5257b3-b5a1-4a87-8abf-984a5839dd5f
+          role: system
+          text: "You are a receipt information extraction engine.\n\nExtract structured\
+            \ data from the receipt image.\n\nReturn ONLY valid JSON. Do not include\
+            \ markdown, explanations, comments, or extra text.\n\nUse this exact JSON\
+            \ schema:\n\n{\n  \"merchant_name\": \"\",\n  \"transaction_date_start\"\
+            : \"\",\n  \"transaction_date_end\": \"\",\n  \"currency\": \"\",\n  \"\
+            total\": \"\",\n  \"items\": [\n    {\n      \"name\": \"\",\n      \"\
+            quantity\": \"\",\n    }\n  ],\n  \"raw_text_confidence\": \"high|medium|low\"\
+            ,\n  \"missing_fields\": []\n}\n\nRules:\n- If a value is not visible,\
+            \ use an empty string.\n- Do not guess missing values.\n- Keep numbers\
+            \ as strings, for example \"12.99\".\n- Use ISO date format YYYY-MM-DD\
+            \ when possible.\n- If there are no specific transaction end date, use\
+            \ transaction_date_start.\n- Include every visible line item.\n- If the\
+            \ receipt is blurry or incomplete, set raw_text_confidence to \"low\"."
+        selected: true
+        structured_output_enabled: false
+        title: LLM-Extraction
+        type: llm
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - '1781681523003'
+            - upload_files
+          enabled: true
+      height: 88
+      id: '1782089700324'
+      position:
+        x: -101.15283661420779
+        y: 351.51744988419813
+      positionAbsolute:
+        x: -101.15283661420779
+        y: 351.51744988419813
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\ndef clean(value):\n    if value is None:\n        return\
+          \ None\n\n    value = str(value).strip()\n\n    if value == \"\":\n    \
+          \    return None\n\n    return value\n\n\ndef main(\n    requestor: str,\n\
+          \    department: str,\n    email: str,\n    student_id: str,\n    submitted_to_type:\
+          \ str,\n    submitted_to_target: str,\n    contact_number: str,\n    supervisor_advisor_faculty:\
+          \ str\n) -> dict:\n\n    submitted_type = clean(submitted_to_type) or \"\
+          Department\"\n    submitted_target = clean(submitted_to_target) or \"CPEG\
+          \ Office\"\n\n    history = {\n        \"fixed_identity\": {\n         \
+          \   \"requestor\": clean(requestor),\n            \"department\": clean(department),\n\
+          \            \"email\": clean(email),\n            \"student_id\": clean(student_id)\n\
+          \        },\n        \"submitted_to\": {\n            \"type\": submitted_type,\n\
+          \            \"target\": submitted_target\n        },\n        \"contact_number\"\
+          : clean(contact_number),\n        \"supervisor_advisor_faculty\": clean(supervisor_advisor_faculty)\n\
+          \    }\n\n    return {\n        \"history_json\": json.dumps(history, ensure_ascii=False)\n\
+          \    }"
+        code_language: python3
+        desc: Pretend to extract the information from previous history.
+        outputs:
+          history_json:
+            children: null
+            type: string
+        selected: false
+        title: Input Parser
+        type: code
+        variables:
+        - value_selector:
+          - '1781681523003'
+          - requestor
+          value_type: string
+          variable: requestor
+        - value_selector:
+          - '1781681523003'
+          - department
+          value_type: string
+          variable: department
+        - value_selector:
+          - '1781681523003'
+          - email
+          value_type: string
+          variable: email
+        - value_selector:
+          - '1781681523003'
+          - student_id
+          value_type: number
+          variable: student_id
+        - value_selector:
+          - '1781681523003'
+          - submitted_to_type
+          value_type: string
+          variable: submitted_to_type
+        - value_selector:
+          - '1781681523003'
+          - submitted_to_target
+          value_type: string
+          variable: submitted_to_target
+        - value_selector:
+          - '1781681523003'
+          - contact_number
+          value_type: string
+          variable: contact_number
+        - value_selector:
+          - '1781681523003'
+          - supervisor_advisor_faculty
+          value_type: string
+          variable: supervisor_advisor_faculty
+      height: 96
+      id: '1782094188525'
+      position:
+        x: -401.1528366142078
+        y: 351.51744988419813
+      positionAbsolute:
+        x: -401.1528366142078
+        y: 351.51744988419813
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1781766217894'
+          - final_claim_json
+          value_type: string
+          variable: final_claim_json
+        selected: false
+        title: Output 3
+        type: end
+      height: 88
+      id: '1782095452465'
+      position:
+        x: 2246.8162914126674
+        y: 311.8113976520371
+      positionAbsolute:
+        x: 2246.8162914126674
+        y: 311.8113976520371
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 809.34320672267
+      y: 163.54321617110196
+      zoom: 0.8345904200609799
+  rag_pipeline_variables: []

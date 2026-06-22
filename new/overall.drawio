@@ -1,0 +1,49 @@
+<mxfile host="Electron">
+  <diagram name="Page-1" id="dplx0kUzaT9ItQZ3GM3_">
+    <mxGraphModel dx="808" dy="486" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="i29OjLUF96wsPChSAgZM-8" edge="1" parent="1" source="i29OjLUF96wsPChSAgZM-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="i29OjLUF96wsPChSAgZM-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="i29OjLUF96wsPChSAgZM-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;font face=&quot;Georgia&quot;&gt;User Input&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="120" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="i29OjLUF96wsPChSAgZM-9" edge="1" parent="1" source="i29OjLUF96wsPChSAgZM-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="i29OjLUF96wsPChSAgZM-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="i29OjLUF96wsPChSAgZM-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;font face=&quot;Georgia&quot;&gt;Code&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Georgia&quot;&gt;Input Parser&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="160" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="i29OjLUF96wsPChSAgZM-10" edge="1" parent="1" source="i29OjLUF96wsPChSAgZM-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="i29OjLUF96wsPChSAgZM-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="i29OjLUF96wsPChSAgZM-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;font face=&quot;Georgia&quot;&gt;LLM - Extraction&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Georgia&quot;&gt;[Gemini 2.5 Flash with Vision]&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="320" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="i29OjLUF96wsPChSAgZM-11" edge="1" parent="1" source="i29OjLUF96wsPChSAgZM-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="i29OjLUF96wsPChSAgZM-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="i29OjLUF96wsPChSAgZM-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;font face=&quot;Georgia&quot;&gt;HTTP Request&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Georgia&quot;&gt;[setting.json from GitHub]&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="480" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="i29OjLUF96wsPChSAgZM-12" edge="1" parent="1" source="i29OjLUF96wsPChSAgZM-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="i29OjLUF96wsPChSAgZM-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="i29OjLUF96wsPChSAgZM-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;font face=&quot;Georgia&quot;&gt;LLM - Understaning&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Georgia&quot;&gt;[gpt-3.5-turbo]&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="480" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="i29OjLUF96wsPChSAgZM-13" edge="1" parent="1" source="i29OjLUF96wsPChSAgZM-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="i29OjLUF96wsPChSAgZM-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="i29OjLUF96wsPChSAgZM-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;font face=&quot;Georgia&quot;&gt;Code&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Georgia&quot;&gt;Combine&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="640" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="i29OjLUF96wsPChSAgZM-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;font face=&quot;Georgia&quot;&gt;Output&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="800" y="280" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

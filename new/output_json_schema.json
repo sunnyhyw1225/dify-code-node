@@ -1,0 +1,25 @@
+{
+    "requestor": "",
+    "department": "",
+    "email": "",
+    "student_id": "",
+    "contact_number": "",
+    "supervisor_advisor_faculty": "",
+    "submitted_to": {
+        "type": "null",
+        "target": "null"
+    },
+    "receipts": [
+        {
+            "transaction_date_start": "",
+            "transaction_date_end": "",
+            "expense_description": "",
+            "currency": "",
+            "amount": "",
+            "expense_group": "",
+            "business_purpose": "",
+            "attach_receipt": "filename or URL",
+            "missing_fields": []
+        }
+    ]
+}

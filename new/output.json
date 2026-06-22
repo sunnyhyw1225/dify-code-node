@@ -1,0 +1,28 @@
+{
+    "requestor": "CHAN, Eason",
+    "department": "ITSO",
+    "email": "abc@connect.ust.hk",
+    "student_id": "21000001",
+    "contact_number": "81234567",
+    "supervisor_advisor_faculty": "Prof. Tim W", 
+    "submitted_to": {
+        "type": "Specific Endorser",
+        "target": "ccadc"
+    }, 
+    "receipts": [
+        {
+            "transaction_date_start": "2024-05-16",
+            "transaction_date_end": "2024-05-16",
+            "expense_description": "Purchase of electronics and accessories from Akihabara Business Electronics Center",
+            "currency": "JPY",
+            "amount": "666,604",
+            "expense_group": "Computer",
+            "business_purpose": "",
+            "attach_receipt": [
+                "URL1",
+                "URL2"
+            ], 
+            "missing_fields": ["business_purpose"]
+        }
+    ]
+}
