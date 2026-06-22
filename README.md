@@ -9,6 +9,7 @@ Go to Dify -> Studio -> Import DSL.
 ## Test Cases
 
 |No.| filename | purpose |
+|---|---|---|
 |1| `test_case_1.png` | png format with detailed lab consumables e-receipt|
 |2| `test_case_2.png` | png format with detailed hotel stay over paper receipt|
 |3| `test_case_3a.jpg`, `test_case_3b.jpg` | jpg format with detailed computer components and electronics split into 2 paper receipt|
