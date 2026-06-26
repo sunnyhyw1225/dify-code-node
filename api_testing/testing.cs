@@ -1,20 +1,17 @@
 // Program.cs
 // Target: .NET 6+
 //
+// Dify Start node variable:
+//   upload_file
+//
+// Variable type:
+//   Single file
+//
 // Usage:
-//   1. Set your Dify API key:
-//      Windows PowerShell:
-//        $env:DIFY_API_KEY="app-xxxx"
-//      macOS/Linux:
-//        export DIFY_API_KEY="app-xxxx"
-//
-//   2. Run:
-//      dotnet run
-//
-//   3. Enter path to a .json file when prompted.
+//   export DIFY_API_KEY="app-xxxx"
+//   dotnet run
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -25,14 +22,14 @@ using System.Threading.Tasks;
 
 class Program
 {
-    private static readonly string DifyApiKey = "app-qUEcJ1aEt5Le3sKQabp2F9z7";
+    private static readonly string DifyApiKey = "";
 
     private const string DifyBaseUrl = "https://api.dify.ai/v1";
 
     static async Task Main()
     {
-        Console.WriteLine("Dify JSON Workflow Test");
-        Console.WriteLine("-----------------------");
+        Console.WriteLine("Dify Single JSON File Workflow Test");
+        Console.WriteLine("-----------------------------------");
 
         if (string.IsNullOrWhiteSpace(DifyApiKey))
         {
@@ -105,7 +102,8 @@ class Program
         byte[] fileBytes = await File.ReadAllBytesAsync(filePath);
 
         var fileContent = new ByteArrayContent(fileBytes);
-        fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+        fileContent.Headers.ContentType =
+            new MediaTypeHeaderValue("application/json");
 
         form.Add(fileContent, "file", Path.GetFileName(filePath));
         form.Add(new StringContent(user), "user");
@@ -142,7 +140,9 @@ class Program
             }
         }
 
-        throw new Exception("Could not find uploaded file ID in Dify response:\n" + responseJson);
+        throw new Exception(
+            "Could not find uploaded file ID in Dify response:\n" + responseJson
+        );
     }
 
     static async Task<string> RunDifyWorkflowAsync(
@@ -181,19 +181,14 @@ class Program
 
     static string BuildWorkflowRequestJson(string uploadedFileId, string user)
     {
-        var uploadFilesArray = new JsonArray
+        var inputs = new JsonObject
         {
-            new JsonObject
+            ["upload_file"] = new JsonObject
             {
-                ["type"] = "document",
+                ["type"] = "custom",
                 ["transfer_method"] = "local_file",
                 ["upload_file_id"] = uploadedFileId
             }
-        };
-
-        var inputs = new JsonObject
-        {
-            ["upload_files"] = uploadFilesArray
         };
 
         var requestBody = new JsonObject
